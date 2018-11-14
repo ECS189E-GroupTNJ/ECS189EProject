@@ -50,6 +50,6 @@
 * Can assume that everyone in the car is already running the app
 
 ## Team Members
-* Tony Woo
-* Noshin Kamal
-* Jason Bhan
+* Tony Woo (Github: tonyswoo)
+* Noshin Kamal (Github: noshin-k)
+* Jason Bhan (Github: jhbhan)
