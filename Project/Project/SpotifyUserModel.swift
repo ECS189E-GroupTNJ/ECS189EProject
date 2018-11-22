@@ -12,6 +12,10 @@ class SpotifyUserModel {
     
     typealias ApiCompletion = ((_ response: [String: Any]?) -> Void)
     
+    let baseURL = "https://api.spotify.com/v1"
+    var playlistList: [(String, String)] = []
+    var currentPlaylistIndex: Int?
+    
     func configuration() -> URLSessionConfiguration {
         let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = 10
@@ -76,6 +80,58 @@ class SpotifyUserModel {
             return
         }
         DispatchQueue.global(qos: .userInitiated).async { completion(responseData) }
+    }
+    
+    func getPlaylistIndexOf(playlistName name: String) -> Int? {
+        for (index, item) in playlistList.enumerated() {
+            if item.0 == name {
+                return index
+            }
+        }
+        return nil
+    }
+    
+    func updatePlaylists() {
+        let getPlaylistURL = "\(baseURL)/me/playlists?limit=50"
+        let getPlaylistQueue = DispatchQueue(label: "get playlist queue")
+        var updatedPlaylistList: [(String, String)] = []
+        
+        getPlaylistQueue.sync {
+            var next: String? = getPlaylistURL
+            let nextBarrier = DispatchGroup()
+            while next != nil {
+                nextBarrier.enter()
+                self.SpotifyAPI(endpoint: next!, param: nil) { (response) in
+                    guard let realResponse = response else {
+                        print("Error accesing server")
+                        return
+                    }
+                    
+                    guard let items = realResponse["items"] as? [[String: Any]] else {
+                        print("Get Playlists item error")
+                        return
+                    }
+                    for playlist in items {
+                        guard let name = playlist["name"] as? String, let id = playlist["id"] as? String else {
+                            print("Playlist does not have name or id")
+                            return
+                        }
+                        updatedPlaylistList.append((name, id))
+                    }
+                    
+                    if let nextURL = realResponse["next"] as? String {
+                        next = nextURL
+                    }
+                    else {
+                        next = nil
+                    }
+                    nextBarrier.leave()
+                }
+                nextBarrier.wait()
+            }
+        }
+        self.playlistList = updatedPlaylistList
+        
     }
     
     
