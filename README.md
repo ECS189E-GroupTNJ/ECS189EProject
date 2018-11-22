@@ -15,25 +15,21 @@
 
 ### VoiceControlViewController
 * upon specific voice command, switch to IdentificationViewController
-* change to capture button if voice doesn’t work
+* start with a capture button, experiment with voice controls if time allows
 
 ### IdentificationViewController
 * After identifying the music / adding to playlist, switch back to VoiceControlViewController
 
 
 ## Models
-* MusicRecognitionModel: 
-* SpotifyModel: handle Spotify related tasks: authentication/playlist modification/music 
-* VoiceControlModel: parse/handle voice commands
+* SpotifyModel: handle Spotify related tasks: authentication/playlist modification
 
 ## Test Planning
 * Classmates/friends survey
 	* How easy is the app to use?
-	* How well does the voice recognition work?
-	* How well does the music recognition work?
-* Quantitative data
-	* How many seconds does the music recognition take?
-	* Success rate of recognizing voice commands
+	* How comfortable is adding the track to the playlist?
+	* What would be some convenient features/configurations for this app?
+	* How long does each task (requring API calls) take?
 
 ![screens](https://github.com/ECS189E-GroupTNJ/ECS189EProject/raw/master/screens.png)
 
