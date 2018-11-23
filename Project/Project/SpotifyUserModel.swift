@@ -15,6 +15,7 @@ class SpotifyUserModel {
     let baseURL = "https://api.spotify.com/v1"
     var playlistList: [(String, String)] = []
     var currentPlaylistIndex: Int?
+    let defaultPlaylistName = "default"
     
     func configuration() -> URLSessionConfiguration {
         let config = URLSessionConfiguration.ephemeral
@@ -80,6 +81,42 @@ class SpotifyUserModel {
             return
         }
         DispatchQueue.global(qos: .userInitiated).async { completion(responseData) }
+    }
+    
+    func getDefaultPlaylist() {
+        let defaultPlaylistBarrier = DispatchGroup()
+        defaultPlaylistBarrier.enter()
+        
+        if let index = getPlaylistIndexOf(playlistName: defaultPlaylistName) {
+            let defaultID = playlistList[index].1
+            let getPlaylistURL = "\(baseURL)/playlists/\(defaultID)"
+            SpotifyAPI(endpoint: getPlaylistURL, param: nil) { (response) in
+                if response == nil {
+                    self.createPlaylist(withName: self.defaultPlaylistName, andLeave: defaultPlaylistBarrier)
+                }
+                else {
+                    self.currentPlaylistIndex = index
+                    defaultPlaylistBarrier.leave()
+                }
+            }
+        }
+        else {
+            self.createPlaylist(withName: self.defaultPlaylistName, andLeave: defaultPlaylistBarrier)
+        }
+        defaultPlaylistBarrier.wait()
+    }
+    
+    func createPlaylist(withName name: String, andLeave barrier: DispatchGroup? = nil) {
+        let postPlaylistURL = "\(self.baseURL)/me/playlists"
+        self.SpotifyAPI(endpoint: postPlaylistURL, param: ["name": name, "public": false, "description": "Auto-created playlist for the app"]) { (response) in
+            if let realResponse = response, let id = realResponse["id"] as? String {
+                self.playlistList.insert((name, id), at: 0)
+                self.currentPlaylistIndex = 0
+            }
+            if let barrier = barrier {
+                barrier.leave()
+            }
+        }
     }
     
     func getPlaylistIndexOf(playlistName name: String) -> Int? {
