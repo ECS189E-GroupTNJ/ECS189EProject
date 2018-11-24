@@ -83,6 +83,48 @@ class SpotifyUserModel {
         DispatchQueue.global(qos: .userInitiated).async { completion(responseData) }
     }
     
+    func addCurrentTrackToPlaylist() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        // need current track information (requires Spotify authorization in advance)
+        guard let track = delegate.currentTrack?.uri else {
+            print("Track not identified")
+            return
+        }
+        
+        if currentPlaylistIndex == -1 && getPlaylistIndexOf(playlistName: defaultPlaylistName) == -1 {
+            getDefaultPlaylist()
+        }
+        
+        addTrackToPlaylist(track: track)
+    }
+    
+    func addTrackToPlaylist(track: String) {
+        guard let playlistIndex = currentPlaylistIndex else {
+            print("Error with the index of the playlist");
+            return
+        }
+        
+        let playlistID = playlistList[playlistIndex].1
+        var postTrackURL = "\(baseURL)/playlists/\(playlistID)/tracks"
+        
+        SpotifyAPI(endpoint: postTrackURL, param: ["uris": [track]]) { (response) in
+            if response == nil {
+                print("Could not add track to playlist")
+                self.getDefaultPlaylist()
+                postTrackURL = "\(self.baseURL)/playlists/\(playlistID)/tracks"
+                self.SpotifyAPI(endpoint: postTrackURL, param: ["uris": [track]]) { (response) in
+                    if response == nil {
+                        print("Track addition failed")
+                    }
+                    else {
+                        print("Added to the default playlist")
+                    }
+                }
+            }
+        }
+    }
+    
     func getDefaultPlaylist() {
         let defaultPlaylistBarrier = DispatchGroup()
         defaultPlaylistBarrier.enter()
