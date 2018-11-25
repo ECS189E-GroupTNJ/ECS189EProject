@@ -1,0 +1,28 @@
+PODS:
+  - LiquidFloatingActionButton (2.0.0)
+  - PeriscommentView (0.0.1)
+
+DEPENDENCIES:
+  - LiquidFloatingActionButton (from `https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git`)
+  - PeriscommentView
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - PeriscommentView
+
+EXTERNAL SOURCES:
+  LiquidFloatingActionButton:
+    :git: https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git
+
+CHECKOUT OPTIONS:
+  LiquidFloatingActionButton:
+    :commit: 7acc6dee04da3ee00ff881309bd64763b216f0e6
+    :git: https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git
+
+SPEC CHECKSUMS:
+  LiquidFloatingActionButton: 61496c787627103ccb3a23d4dea71faef4a84d4d
+  PeriscommentView: b4e91cdb18bfc0aa4ec3eaac322d93102ea3facb
+
+PODFILE CHECKSUM: b52056fd6d5fd20850556413661430f815917c25
+
+COCOAPODS: 1.5.3
