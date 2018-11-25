@@ -9,7 +9,7 @@
 import Foundation
 
 class SpotifyUserModel {
-    
+    /*
     typealias ApiCompletion = ((_ response: [String: Any]?) -> Void)
     
     let baseURL = "https://api.spotify.com/v1"
@@ -28,6 +28,7 @@ class SpotifyUserModel {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
         // need to get proper access token, waiting for authentication process
+        
         guard let url = URL(string: endpoint), let accessToken = delegate.appRemote.connectionParameters.accessToken else {
             return
         }
@@ -46,6 +47,7 @@ class SpotifyUserModel {
             SpotifyGET(session: session, request: request, completion: completion)
         }
     }
+ 
     
     func SpotifyGET(session: URLSession, request: URLRequest, completion: @escaping ApiCompletion) {
         session.dataTask(with: request) { (data, response, error) in
@@ -83,6 +85,7 @@ class SpotifyUserModel {
         DispatchQueue.global(qos: .userInitiated).async { completion(responseData) }
     }
     
+    
     func addCurrentTrackToPlaylist() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -98,6 +101,7 @@ class SpotifyUserModel {
         
         addTrackToPlaylist(track: track)
     }
+ 
     
     func addTrackToPlaylist(track: String) {
         guard let playlistIndex = currentPlaylistIndex else {
@@ -213,5 +217,5 @@ class SpotifyUserModel {
         
     }
     
-    
+    */
 }
