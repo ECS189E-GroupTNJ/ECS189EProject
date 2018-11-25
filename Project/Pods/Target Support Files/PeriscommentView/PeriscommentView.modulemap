@@ -1,0 +1,6 @@
+framework module PeriscommentView {
+  umbrella header "PeriscommentView-umbrella.h"
+
+  export *
+  module * { export * }
+}
