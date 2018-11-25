@@ -35,3 +35,19 @@
 	* By default, add to a playlist of set name
 		* possible extension to select a playlist as a setting
 	* Task Owner: Tony
+    
+
+## Meeting 2
+
+### Past Progress
+* UI (Noshin)
+    * Found opensource library to make UI more aesthetic
+    * VC 1 - capture button detects current song and adds to list
+    * VC 2 - settings VC, configurations: pick which playlist you want to add to
+    * VC 3 - Challenge - turn on/off the feature of adding song to people around you in the car 
+
+### Current Issues
+* -
+
+### Coming Tasks
+* Add song to everyone's playlist in the car
