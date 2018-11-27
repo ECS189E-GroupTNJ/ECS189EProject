@@ -1,14 +1,17 @@
 PODS:
   - LiquidFloatingActionButton (2.0.0)
   - PeriscommentView (0.0.1)
+  - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - LiquidFloatingActionButton (from `https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git`)
   - PeriscommentView
+  - SnapKit (~> 4.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - PeriscommentView
+    - SnapKit
 
 EXTERNAL SOURCES:
   LiquidFloatingActionButton:
@@ -22,7 +25,8 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   LiquidFloatingActionButton: 61496c787627103ccb3a23d4dea71faef4a84d4d
   PeriscommentView: b4e91cdb18bfc0aa4ec3eaac322d93102ea3facb
+  SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: b52056fd6d5fd20850556413661430f815917c25
+PODFILE CHECKSUM: 96340107a111f41d56bce7a0ae66f21de70110d2
 
 COCOAPODS: 1.5.3

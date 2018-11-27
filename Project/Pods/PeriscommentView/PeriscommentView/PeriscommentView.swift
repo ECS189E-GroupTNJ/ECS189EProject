@@ -42,7 +42,7 @@ public class PeriscommentView: UIView {
         visibleCells.append(cell)
         self.addSubview(cell)
         
-        UIView.animate(withDuration: self.config.appearDuration, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: { () -> Void in
+        UIView.animate(withDuration: self.config.appearDuration, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: { () -> Void in
             let dy = cell.frame.height + self.config.layout.cellSpace
             for c in self.visibleCells {
                 let origin = c.transform
@@ -51,7 +51,7 @@ public class PeriscommentView: UIView {
             }
         }, completion: nil)
         
-        UIView.animate(withDuration: self.config.disappearDuration, delay: self.config.appearDuration, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+        UIView.animate(withDuration: self.config.disappearDuration, delay: self.config.appearDuration, options: UIView.AnimationOptions.curveEaseIn, animations: { () -> Void in
             cell.alpha = 0.0
         }) { (Bool) -> Void in
             cell.removeFromSuperview()
