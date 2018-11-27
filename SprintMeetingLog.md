@@ -40,14 +40,36 @@
 ## Meeting 2
 
 ### Past Progress
-* UI (Noshin)
-    * Found opensource library to make UI more aesthetic
-    * VC 1 - capture button detects current song and adds to list
-    * VC 2 - settings VC, configurations: pick which playlist you want to add to
-    * VC 3 - Challenge - turn on/off the feature of adding song to people around you in the car 
+* UI 
+	* Initial screen complete
+	* Song addition screen complete
+	
+* Authorization
+	* Registered developer app for spotify
+	* Receive access tokens
+	* Able to connect to installed Spotify app
+	
+* Track Identification
+	* Able to retrieve current track info (given authentication setup)
+	* Retreive album cover, artist name, track title for possible UI usage
+
+* Addition to Playlist
+	* Default playlist created if not selected
+	* Create playlist if necessary
+	* Update the user's list of playlists
+	* Add the track to playlist given track ID
+	* Implement Spotify Web API calls
 
 ### Current Issues
-* -
+* Framework/Library to be used for Challenge not decided
+	* To be discussed again in the next meeting
 
 ### Coming Tasks
-* Add song to everyone's playlist in the car
+* Research possible methods of detecting near by app users
+
+* Implement View Controllers (connect UI and model)
+* UI for PlaylistTableView
+* Professor's Challenge
+* Retrieve playlist image for display
+
+* Tasks to be distributed on Tuesday (Next meeting)
