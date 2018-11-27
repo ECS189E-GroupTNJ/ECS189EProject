@@ -16,6 +16,9 @@
 		22F303ED21A56930008E9CD5 /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F303EC21A56930008E9CD5 /* ProjectTests.swift */; };
 		22F303F821A56930008E9CD5 /* ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F303F721A56930008E9CD5 /* ProjectUITests.swift */; };
 		22F3040721A56A19008E9CD5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */; };
+		3FA64AC121ACC6BE0095D177 /* AddSongVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */; };
+		3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC221ACC7540095D177 /* RoundButton.swift */; };
+		3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */; };
 		66BE070ADBC0FA16864DB4BF /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E702903F6E086933607E390B /* Pods_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		22F303F921A56930008E9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22F3040521A569AE008E9CD5 /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
+		3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongVC.swift; sourceTree = "<group>"; };
+		3FA64AC221ACC7540095D177 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVC.swift; sourceTree = "<group>"; };
 		B6CC19D58B53DCCCBD264CFC /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
 		E702903F6E086933607E390B /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,6 +121,9 @@
 				22F303D721A56930008E9CD5 /* AppDelegate.swift */,
 				22F303D921A56930008E9CD5 /* ViewController.swift */,
 				22F303DB21A56930008E9CD5 /* Main.storyboard */,
+				3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */,
+				3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */,
+				3FA64AC221ACC7540095D177 /* RoundButton.swift */,
 				22F303DE21A56930008E9CD5 /* Assets.xcassets */,
 				22F303E021A56930008E9CD5 /* LaunchScreen.storyboard */,
 				22F303E321A56930008E9CD5 /* Info.plist */,
@@ -341,8 +350,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F303DA21A56930008E9CD5 /* ViewController.swift in Sources */,
+				3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */,
+				3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */,
 				228C6EC321A6548F008DA3A0 /* SpotifyUserModel.swift in Sources */,
 				22F303D821A56930008E9CD5 /* AppDelegate.swift in Sources */,
+				3FA64AC121ACC6BE0095D177 /* AddSongVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
