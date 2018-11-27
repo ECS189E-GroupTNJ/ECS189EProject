@@ -30,8 +30,8 @@ public class CustomCell : LiquidFloatingCell {
         label.font = UIFont(name: "Helvetica-Neue", size: 12)
         addSubview(label)
         label.snp.makeConstraints { make in
-            make.left.equalTo(self).offset(-80)
-            make.width.equalTo(75)
+            make.left.equalTo(self).offset(-155)
+            make.width.equalTo(180)
             make.top.height.equalTo(self)
         }
     }
@@ -102,12 +102,24 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         let floatingFrame = CGRect(x: self.view.frame.width - 56 - 16, y: self.view.frame.height - 56 - 16, width: 56, height: 56)
         settingsButton = createButton(floatingFrame, .up)
         
+        settingCells.append(CustomCell(icon: UIImage(named: "playlist")!, name: "select playlist"))
+        settingCells.append(CustomCell(icon: UIImage(named: "peer")!, name: "receive notification"))
+        settingCells.append(CustomCell(icon: UIImage(named: "peer")!, name: "send notification"))
+        
+        
         self.view.addSubview(settingsButton)
     }
     
     func liquidFloatingActionButton(_ liquidFloatingActionButton: LiquidFloatingActionButton, didSelectItemAtIndex index: Int) {
-        print("did Tapped! \(index)")
         liquidFloatingActionButton.close()
+        switch index {
+        case 0:
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "playlistVC")
+            self.navigationController?.pushViewController(viewController, animated: true)
+        case 1: ()
+        case 2: ()
+        default: ()
+        }
     }
 
 }

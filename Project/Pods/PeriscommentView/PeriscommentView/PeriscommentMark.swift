@@ -21,7 +21,7 @@ import UIKit
     private func setupView(image: UIImage) {
         imageView = UIImageView(image: image)
         imageView!.frame = self.frame
-        imageView!.contentMode = UIViewContentMode.scaleAspectFit
+        imageView!.contentMode = UIView.ContentMode.scaleAspectFit
         self.addSubview(imageView!)
         
         let colorView = UIView(frame: self.frame)

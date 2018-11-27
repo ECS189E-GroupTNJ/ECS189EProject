@@ -9,6 +9,7 @@ platform :ios, '12.0'
     pod 'LiquidFloatingActionButton', :git => 'https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git'
     # Send notification to people in the car
     pod 'PeriscommentView'
+    pod 'SnapKit', '~> 4.2.0'
 
 end
 
