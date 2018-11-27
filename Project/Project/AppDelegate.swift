@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 
 @UIApplicationMain
-class AppDelegate: SPTSessionManagerDelegate, SPTAppRemoteDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate, SPTAppRemoteDelegate {
 
     let SpotifyClientID = "ourSpotifyClientID"
     let SpotifyRedirectURL = URL(string: ":ourRedirectURL")!
