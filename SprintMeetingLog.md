@@ -43,15 +43,18 @@
 * UI 
 	* Initial screen complete
 	* Song addition screen complete
+	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/0e773e579460c500f6e00a551c8a2dce6c39b8a5
 	
 * Authorization
 	* Registered developer app for spotify
 	* Receive access tokens
 	* Able to connect to installed Spotify app
+	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/0a259055b4ec914a316a40018c439ff3894ece54
 	
 * Track Identification
 	* Able to retrieve current track info (given authentication setup)
 	* Retreive album cover, artist name, track title for possible UI usage
+	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/25dbf0ed25a88a40481f26e4202c74165f37d86c
 
 * Addition to Playlist
 	* Default playlist created if not selected
@@ -59,6 +62,7 @@
 	* Update the user's list of playlists
 	* Add the track to playlist given track ID
 	* Implement Spotify Web API calls
+	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/25dbf0ed25a88a40481f26e4202c74165f37d86c
 
 ### Current Issues
 * Framework/Library to be used for Challenge not decided
