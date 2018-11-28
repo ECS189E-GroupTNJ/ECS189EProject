@@ -10,29 +10,33 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate, SPTAppRemoteDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
 
-    let SpotifyClientID = "ourSpotifyClientID"
-    let SpotifyRedirectURL = URL(string: ":ourRedirectURL")!
+    let SpotifyClientID = "62c834c410f148b1bdb505938a66cd7b"
+    let SpotifyRedirectURL = URL(string: "driver-spotify-login://callback/")!
+    var currentTrack: SPTAppRemoteTrack?
+    var imageAPI: SPTAppRemoteImageAPI?
+    var userAPI: SPTAppRemoteUserAPI?
+
     //setupConfig
     lazy var configuration: SPTConfiguration = {
-    let configuration = SPTConfiguration(clientID: SpotifyClientID, redirectURL: SpotifyRedirectURL)
-    configuration.playURI = ""
-    configuration.tokenSwapURL = URL(string: "https://yourapp.herokuapp.com/api/token")
-    configuration.tokenRefreshURL = URL(string: "https://yourapp.herokuapp.com/api/refresh_token")
-    
-    return configuration
+        let configuration = SPTConfiguration(clientID: SpotifyClientID, redirectURL: SpotifyRedirectURL)
+        configuration.playURI = ""
+        configuration.tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token")
+        configuration.tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
+        
+        return configuration
     }()
     //set up sessionManager
-    lazy var sessionManager: SPTSessionManager = {
-    let sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
-    return sessionManager
+        lazy var sessionManager: SPTSessionManager = {
+        let sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
+        return sessionManager
     }()
     //set up appRemote
     lazy var appRemote:SPTAppRemote = {
-    let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
-    appRemote.delegate = self
-    return appRemote
+        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+        appRemote.delegate = self
+        return appRemote
     }()
     
     /*
@@ -48,33 +52,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     //////////////////////
     //////////////////////
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-    print("connected successfully")
+        // Connection was successful, you can begin issuing commands
+        self.appRemote.playerAPI?.delegate = self
+        
+        self.appRemote.playerAPI?.getPlayerState({ (data, error) in
+            switch(data, error) {
+            case (.some, nil):
+                self.currentTrack = (data as! SPTAppRemotePlayerState).track
+            case(nil, .some):
+                print("error fetching the initial current track")
+            default: ()
+            }
+        })
+        self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
+            if let error = error {
+                debugPrint(error.localizedDescription)
+            }
+        })
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
-    print("failed to connect")
+        print("failed to connect")
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-    print("ran into erro: disconnected")
+        print("ran into error: disconnected")
     }
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-    print("player state changed")
+        currentTrack = playerState.track
     }
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-    appRemote.connectionParameters.accessToken = session.accessToken
-    appRemote.connect()
+        appRemote.connectionParameters.accessToken = session.accessToken
+        appRemote.connect()
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-    print("session failed to initiate")
+        print("session failed to initiate")
     }
     
     private func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-    self.sessionManager.application(app, open: url, options: options)
-    return true
+        self.sessionManager.application(app, open: url, options: options)
+        return true
     }
     
     var window: UIWindow?
