@@ -42,6 +42,9 @@
                                 <rect key="frame" x="42" y="454" width="330" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="CONNECT WITH SPOTIFY"/>
+                                <connections>
+                                    <action selector="connectToSpotify" destination="BYZ-38-t0r" eventType="touchUpInside" id="KI2-1k-kIR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -201,14 +204,51 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="playlistCell" id="OzD-Y5-yKC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="playlistCell" id="OzD-Y5-yKC" customClass="PlaylistTableViewCell" customModule="Project" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OzD-Y5-yKC" id="6xU-NH-Vs0">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="79.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NQP-NC-77P">
+                                                    <rect key="frame" x="329" y="7.3333333333333357" width="65" height="65"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="65" id="ciq-ku-S4B"/>
+                                                        <constraint firstAttribute="height" constant="65" id="otv-6G-RZy"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuO-oG-IEp" customClass="RadioButton" customModule="Project" customModuleProvider="target">
+                                                    <rect key="frame" x="14" y="27.333333333333329" width="25" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="ALa-jI-1Nl"/>
+                                                        <constraint firstAttribute="height" constant="25" id="z1q-sh-eXT"/>
+                                                    </constraints>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThisIsALongName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2is-y7-fnq">
+                                                    <rect key="frame" x="54" y="28" width="255" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="NQP-NC-77P" firstAttribute="leading" secondItem="2is-y7-fnq" secondAttribute="trailing" constant="20" id="26I-8S-Omb"/>
+                                                <constraint firstItem="NQP-NC-77P" firstAttribute="centerY" secondItem="6xU-NH-Vs0" secondAttribute="centerY" id="PQ2-47-EQa"/>
+                                                <constraint firstItem="2is-y7-fnq" firstAttribute="leading" secondItem="TuO-oG-IEp" secondAttribute="trailing" constant="15" id="TUj-Zj-HZk"/>
+                                                <constraint firstAttribute="trailing" secondItem="NQP-NC-77P" secondAttribute="trailing" constant="20" id="al5-RI-RRJ"/>
+                                                <constraint firstItem="2is-y7-fnq" firstAttribute="centerY" secondItem="6xU-NH-Vs0" secondAttribute="centerY" id="bgp-VR-6dI"/>
+                                                <constraint firstItem="TuO-oG-IEp" firstAttribute="centerY" secondItem="6xU-NH-Vs0" secondAttribute="centerY" id="lM2-G0-b8C"/>
+                                                <constraint firstItem="TuO-oG-IEp" firstAttribute="leading" secondItem="6xU-NH-Vs0" secondAttribute="leading" constant="14" id="trc-UY-j8z"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="playlistCover" destination="NQP-NC-77P" id="ark-u7-Q5r"/>
+                                            <outlet property="playlistName" destination="2is-y7-fnq" id="R2Z-3l-Egy"/>
+                                            <outlet property="selectedButton" destination="TuO-oG-IEp" id="pCB-cP-ccz"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -225,6 +265,9 @@
                     <navigationItem key="navigationItem" title="Select a Playlist" id="tRp-WM-6bS"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="playlistTable" destination="xHr-z1-Jge" id="lID-aS-gUI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ceI-Cm-Jc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
