@@ -27,5 +27,11 @@ class ViewController: UIViewController {
         
     }
 
+    @IBAction func connectToSpotify() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistModifyPrivate, .playlistReadPrivate, .userLibraryRead, .userLibraryModify, .userReadCurrentlyPlaying]
+        delegate.sessionManager.initiateSession(with: scope, options: .default)
+    }
 }
 
