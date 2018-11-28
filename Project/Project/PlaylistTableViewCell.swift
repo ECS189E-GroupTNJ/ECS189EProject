@@ -10,6 +10,10 @@ import UIKit
 
 class PlaylistTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var selectedButton: RadioButton!
+    @IBOutlet weak var playlistName: UILabel!
+    @IBOutlet weak var playlistCover: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -17,7 +21,6 @@ class PlaylistTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
         // Configure the view for the selected state
     }
 
