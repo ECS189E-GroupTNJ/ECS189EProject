@@ -79,6 +79,8 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
 
     @IBOutlet weak var captureButton: UIButton!
     
+    var userModel = SpotifyUserModel()
+    
     var settingsButton: LiquidFloatingActionButton!
     var settingCells: [LiquidFloatingCell] = []
     
@@ -121,5 +123,10 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         default: ()
         }
     }
+    
+    @IBAction func capturePressed() {
+        userModel.addCurrentTrackToPlaylist()
+    }
+    
 
 }

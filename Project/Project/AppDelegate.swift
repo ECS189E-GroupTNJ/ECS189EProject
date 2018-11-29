@@ -19,18 +19,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     var userAPI: SPTAppRemoteUserAPI?
 
     //setupConfig
-    lazy var configuration: SPTConfiguration = {
-        let configuration = SPTConfiguration(clientID: SpotifyClientID, redirectURL: SpotifyRedirectURL)
-        configuration.playURI = ""
-        configuration.tokenSwapURL = URL(string: "https://spotify-token-swap.glitch.me/api/token")
-        configuration.tokenRefreshURL = URL(string: "https://spotify-token-swap.glitch.me/api/refresh_token")
-        
-        return configuration
-    }()
+    lazy var configuration: SPTConfiguration = SPTConfiguration(clientID: SpotifyClientID, redirectURL: SpotifyRedirectURL)
     //set up sessionManager
-        lazy var sessionManager: SPTSessionManager = {
-        let sessionManager = SPTSessionManager(configuration: configuration, delegate: self)
-        return sessionManager
+    lazy var sessionManager: SPTSessionManager = {
+        configuration.playURI = ""
+        configuration.tokenSwapURL = URL(string: "https://driverspotify.herokuapp.com/api/token")!
+        configuration.tokenRefreshURL = URL(string: "https://driverspotify.herokuapp.com/api/refresh_token")!
+        let manager = SPTSessionManager(configuration: configuration, delegate: self)
+        return manager
     }()
     //set up appRemote
     lazy var appRemote:SPTAppRemote = {
@@ -54,16 +50,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         // Connection was successful, you can begin issuing commands
         self.appRemote.playerAPI?.delegate = self
-        
+        print("HERE")
+        /*
         self.appRemote.playerAPI?.getPlayerState({ (data, error) in
             switch(data, error) {
             case (.some, nil):
                 self.currentTrack = (data as! SPTAppRemotePlayerState).track
+                print("track: \(self.currentTrack?.name ?? "???")")
             case(nil, .some):
                 print("error fetching the initial current track")
             default: ()
             }
         })
+ */
         self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
             if let error = error {
                 debugPrint(error.localizedDescription)
@@ -84,15 +83,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     }
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
+        print("ASDASDASDASD")
         appRemote.connectionParameters.accessToken = session.accessToken
+        print("CONNECT")
         appRemote.connect()
     }
     
     func sessionManager(manager: SPTSessionManager, didFailWith error: Error) {
-        print("session failed to initiate")
+        print("session failed to initiate, \(error.localizedDescription)")
     }
     
-    private func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func sessionManager(manager: SPTSessionManager, didRenew session: SPTSession) {
+        print("renewed", session)
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         self.sessionManager.application(app, open: url, options: options)
         return true
     }
@@ -130,10 +135,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        //self.saveContext()
     }
     
     // MARK: - Core Data stack
+    
+    
     
     lazy var persistentContainer: NSPersistentContainer = {
         /*

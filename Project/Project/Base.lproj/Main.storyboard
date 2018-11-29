@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Kb9-gH-QTS" kind="relationship" relationship="rootViewController" id="wci-eu-8ad"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="sUw-Vp-iK4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiR-Hs-Cie" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -34,14 +34,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="main_bg" translatesAutoresizingMaskIntoConstraints="NO" id="KtQ-6b-ZWf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="2ndVC" translatesAutoresizingMaskIntoConstraints="NO" id="4oY-bO-IFh">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzl-NZ-yEr">
-                                <rect key="frame" x="42" y="454" width="330" height="33"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzl-NZ-yEr" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                                <rect key="frame" x="45.666666666666657" y="426" width="323" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
-                                <state key="normal" title="CONNECT WITH SPOTIFY"/>
+                                <state key="normal" title="  CONNECT WITH SPOTIFY  "/>
                                 <connections>
                                     <action selector="connectToSpotify" destination="BYZ-38-t0r" eventType="touchUpInside" id="KI2-1k-kIR"/>
                                 </connections>
@@ -49,13 +49,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bzl-NZ-yEr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="366" id="HVJ-Ob-sFo"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bzl-NZ-yEr" secondAttribute="trailing" constant="42" id="Hci-JQ-yu7"/>
-                            <constraint firstItem="bzl-NZ-yEr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="42" id="Qqy-81-dsp"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bzl-NZ-yEr" secondAttribute="bottom" constant="375" id="bco-La-gfA"/>
+                            <constraint firstItem="bzl-NZ-yEr" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Bj6-ma-0J7"/>
+                            <constraint firstItem="bzl-NZ-yEr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X7E-Me-B7M"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ab7-gS-aUG"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -152,6 +151,9 @@
                                         <real key="value" value="37.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="capturePressed" destination="Kb9-gH-QTS" eventType="touchUpInside" id="mI4-u6-RGd"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press Capture to Add Song" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eIy-Jz-Jja">
                                 <rect key="frame" x="58" y="207.66666666666666" width="298" height="33"/>
@@ -276,6 +278,5 @@
     </scenes>
     <resources>
         <image name="2ndVC" width="1024" height="768"/>
-        <image name="main_bg" width="320" height="478"/>
     </resources>
 </document>

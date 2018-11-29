@@ -19,7 +19,7 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleURLName&gt;</key>
+			<key>CFBundleURLName</key>
 			<string>com.ecs189e.driver-spotify</string>
 			<key>CFBundleURLSchemes</key>
 			<array>

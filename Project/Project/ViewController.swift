@@ -15,6 +15,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.connectWithSpotifyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        self.connectWithSpotifyButton.titleLabel?.minimumScaleFactor = 0.5
+        
         // Do any additional setup after loading the view, typically from a nib.
         connectWithSpotifyButton.layer.cornerRadius = connectWithSpotifyButton.frame.height / 2
         connectWithSpotifyButton.setTitleColor(UIColor.white, for: .normal)
@@ -28,10 +32,16 @@ class ViewController: UIViewController {
     }
 
     @IBAction func connectToSpotify() {
+        print("Button")
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
         let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistModifyPrivate, .playlistReadPrivate, .userLibraryRead, .userLibraryModify, .userReadCurrentlyPlaying]
         delegate.sessionManager.initiateSession(with: scope, options: .default)
+        
+        print("Button Pressed")
+        
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addSongVC")
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
