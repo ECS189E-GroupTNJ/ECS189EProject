@@ -552,7 +552,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "ecs189e-groupTNJ.Project";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecs189e.driver-spotify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Project-Bridging-Header.h";
@@ -578,7 +578,7 @@
 					"@executable_path/Frameworks",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = "ecs189e-groupTNJ.Project";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ecs189e.driver-spotify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "Project-Bridging-Header.h";

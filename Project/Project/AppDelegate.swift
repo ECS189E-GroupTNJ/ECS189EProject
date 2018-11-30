@@ -79,6 +79,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     }
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
+        print("CHANGE CHANGE")
         currentTrack = playerState.track
     }
     
@@ -99,6 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         self.sessionManager.application(app, open: url, options: options)
+        print("HERE \(url.absoluteString)")
         return true
     }
     

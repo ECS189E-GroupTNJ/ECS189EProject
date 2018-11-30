@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="sUw-Vp-iK4"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hBg-6k-BW0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiR-Hs-Cie" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,11 +78,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ug-lc-XUM" customClass="RoundButton" customModule="Project" customModuleProvider="target">
-                                <rect key="frame" x="89.666666666666686" y="330.66666666666669" width="235" height="235.00000000000006"/>
+                                <rect key="frame" x="89" y="330" width="236" height="236"/>
                                 <color key="backgroundColor" red="0.87663950930000001" green="0.2461886267" blue="0.14737157789999999" alpha="0.095917166145205485" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="235" id="NFo-He-Cio"/>
-                                    <constraint firstAttribute="height" constant="235" id="UDg-6o-Yew"/>
+                                    <constraint firstAttribute="width" secondItem="3ug-lc-XUM" secondAttribute="height" multiplier="1:1" id="Ufq-6i-Vpi"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -91,11 +90,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4cY-We-iSE" customClass="RoundButton" customModule="Project" customModuleProvider="target">
-                                <rect key="frame" x="109.66666666666669" y="350.66666666666669" width="195" height="195.00000000000006"/>
+                                <rect key="frame" x="109.66666666666667" y="350.66666666666669" width="194.66666666666663" height="194.66666666666669"/>
                                 <color key="backgroundColor" red="0.87663950930000001" green="0.2461886267" blue="0.14737157789999999" alpha="0.20135916100821918" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="195" id="1Gz-Ax-L8H"/>
-                                    <constraint firstAttribute="height" constant="195" id="B7g-Uj-3MC"/>
+                                    <constraint firstAttribute="width" secondItem="4cY-We-iSE" secondAttribute="height" multiplier="1:1" id="NCx-vc-w18"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -104,11 +102,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMt-YP-JrK" customClass="RoundButton" customModule="Project" customModuleProvider="target">
-                                <rect key="frame" x="129.66666666666666" y="370.66666666666669" width="154.99999999999997" height="155.00000000000006"/>
+                                <rect key="frame" x="129.33333333333331" y="370.33333333333331" width="155.33333333333331" height="155.33333333333331"/>
                                 <color key="backgroundColor" red="0.87663950926156209" green="0.24618862666202293" blue="0.14737157790285876" alpha="0.30139661815068491" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="155" id="4ka-cz-EQm"/>
-                                    <constraint firstAttribute="width" constant="155" id="m7f-eU-lE1"/>
+                                    <constraint firstAttribute="width" secondItem="zMt-YP-JrK" secondAttribute="height" multiplier="1:1" id="sgs-xQ-8Zi"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -117,11 +114,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfn-Ll-4p0" customClass="RoundButton" customModule="Project" customModuleProvider="target">
-                                <rect key="frame" x="149.66666666666666" y="390.66666666666669" width="114.99999999999997" height="115"/>
+                                <rect key="frame" x="149" y="390" width="116" height="116"/>
                                 <color key="backgroundColor" red="0.87663950926156209" green="0.24618862666202293" blue="0.14737157790285876" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="115" id="KW0-Xh-kK7"/>
-                                    <constraint firstAttribute="height" constant="115" id="Pgw-qO-Gmq"/>
+                                    <constraint firstAttribute="width" secondItem="Nfn-Ll-4p0" secondAttribute="height" multiplier="1:1" id="hRH-Zf-aAz"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -130,11 +126,10 @@
                                 </userDefinedRuntimeAttributes>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-b7-Tai" customClass="RoundButton" customModule="Project" customModuleProvider="target">
-                                <rect key="frame" x="169.66666666666666" y="410.66666666666669" width="75" height="75"/>
+                                <rect key="frame" x="169.66666666666666" y="410.66666666666669" width="74.666666666666657" height="74.666666666666686"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="75" id="lUj-gz-XNS"/>
-                                    <constraint firstAttribute="height" constant="75" id="o6L-Dw-YSO"/>
+                                    <constraint firstAttribute="width" secondItem="Ocp-b7-Tai" secondAttribute="height" multiplier="1:1" id="f9Y-pY-Nsz"/>
                                 </constraints>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -165,16 +160,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Nfn-Ll-4p0" firstAttribute="centerX" secondItem="qRH-PL-42G" secondAttribute="centerX" id="3fX-39-O57"/>
+                            <constraint firstItem="Ocp-b7-Tai" firstAttribute="width" secondItem="qRH-PL-42G" secondAttribute="width" multiplier="0.18" id="D9n-eI-e0S"/>
                             <constraint firstItem="4cY-We-iSE" firstAttribute="centerY" secondItem="qRH-PL-42G" secondAttribute="centerY" id="JZ7-J6-CJQ"/>
                             <constraint firstItem="3ug-lc-XUM" firstAttribute="centerX" secondItem="qRH-PL-42G" secondAttribute="centerX" id="NCO-e7-BWf"/>
                             <constraint firstItem="eIy-Jz-Jja" firstAttribute="centerY" secondItem="qRH-PL-42G" secondAttribute="centerY" multiplier="0.5" id="Ojg-fj-Bcv"/>
                             <constraint firstItem="Ocp-b7-Tai" firstAttribute="centerY" secondItem="qRH-PL-42G" secondAttribute="centerY" id="d1g-Ka-Cpf"/>
+                            <constraint firstItem="4cY-We-iSE" firstAttribute="width" secondItem="qRH-PL-42G" secondAttribute="width" multiplier="0.47" id="dLr-rc-s6j"/>
                             <constraint firstItem="Nfn-Ll-4p0" firstAttribute="centerY" secondItem="qRH-PL-42G" secondAttribute="centerY" id="gKB-Zu-3fV"/>
                             <constraint firstItem="zMt-YP-JrK" firstAttribute="centerY" secondItem="qRH-PL-42G" secondAttribute="centerY" id="glS-5a-tJJ"/>
                             <constraint firstItem="3ug-lc-XUM" firstAttribute="centerY" secondItem="qRH-PL-42G" secondAttribute="centerY" id="ldG-0I-u6J"/>
                             <constraint firstItem="4cY-We-iSE" firstAttribute="centerX" secondItem="qRH-PL-42G" secondAttribute="centerX" id="npt-OS-EKj"/>
+                            <constraint firstItem="Nfn-Ll-4p0" firstAttribute="width" secondItem="qRH-PL-42G" secondAttribute="width" multiplier="0.28" id="q6s-Yk-myP"/>
                             <constraint firstItem="eIy-Jz-Jja" firstAttribute="centerX" secondItem="qRH-PL-42G" secondAttribute="centerX" id="sIH-XM-f4R"/>
                             <constraint firstItem="zMt-YP-JrK" firstAttribute="centerX" secondItem="qRH-PL-42G" secondAttribute="centerX" id="u0T-e9-3xt"/>
+                            <constraint firstItem="zMt-YP-JrK" firstAttribute="width" secondItem="qRH-PL-42G" secondAttribute="width" multiplier="0.375" id="vGK-HD-K4E"/>
+                            <constraint firstItem="3ug-lc-XUM" firstAttribute="width" secondItem="qRH-PL-42G" secondAttribute="width" multiplier="0.57" id="zOE-Io-lrE"/>
                             <constraint firstItem="Ocp-b7-Tai" firstAttribute="centerX" secondItem="qRH-PL-42G" secondAttribute="centerX" id="zOk-zy-YyM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="q6g-r7-DMv"/>
@@ -184,6 +184,11 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="captureButton" destination="Ocp-b7-Tai" id="40P-5T-V74"/>
+                        <outletCollection property="roundButtons" destination="Ocp-b7-Tai" collectionClass="NSMutableArray" id="dV2-N4-Og9"/>
+                        <outletCollection property="roundButtons" destination="Nfn-Ll-4p0" collectionClass="NSMutableArray" id="QCJ-Pb-PfP"/>
+                        <outletCollection property="roundButtons" destination="zMt-YP-JrK" collectionClass="NSMutableArray" id="PTP-x6-t7l"/>
+                        <outletCollection property="roundButtons" destination="4cY-We-iSE" collectionClass="NSMutableArray" id="dAb-Eq-vtX"/>
+                        <outletCollection property="roundButtons" destination="3ug-lc-XUM" collectionClass="NSMutableArray" id="VX7-C7-DJj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOS-Vn-ipg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -226,15 +231,27 @@
                                                         <constraint firstAttribute="width" constant="25" id="ALa-jI-1Nl"/>
                                                         <constraint firstAttribute="height" constant="25" id="z1q-sh-eXT"/>
                                                     </constraints>
+                                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal">
+                                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="circleColor">
+                                                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="fillCircleColor">
+                                                            <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThisIsALongName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2is-y7-fnq">
                                                     <rect key="frame" x="54" y="28" width="255" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="NQP-NC-77P" firstAttribute="leading" secondItem="2is-y7-fnq" secondAttribute="trailing" constant="20" id="26I-8S-Omb"/>
                                                 <constraint firstItem="NQP-NC-77P" firstAttribute="centerY" secondItem="6xU-NH-Vs0" secondAttribute="centerY" id="PQ2-47-EQa"/>

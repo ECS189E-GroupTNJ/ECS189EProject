@@ -79,10 +79,13 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
 
     @IBOutlet weak var captureButton: UIButton!
     
-    var userModel = SpotifyUserModel()
+    var userModel = SpotifyUserModel(forTheFirstTime: true)
     
     var settingsButton: LiquidFloatingActionButton!
     var settingCells: [LiquidFloatingCell] = []
+    
+    
+    @IBOutlet var roundButtons: [RoundButton]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +95,14 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         captureButton.layer.shadowRadius = 50
         captureButton.layer.shadowOpacity = 0.5
         captureButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        captureButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        captureButton.titleLabel?.minimumScaleFactor = 0.5
+        
+        
+        for roundButton in roundButtons {
+            roundButton.cornerRadius = roundButton.frame.height / 2
+            print(roundButton.cornerRadius, roundButton.frame.height)
+        }
         
         let createButton: (CGRect, LiquidFloatingActionButtonAnimateStyle) -> LiquidFloatingActionButton = { (frame, style) in
             let floatingActionButton = CustomDrawingActionButton(frame: frame)
@@ -116,7 +127,8 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         liquidFloatingActionButton.close()
         switch index {
         case 0:
-            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "playlistVC")
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "playlistVC") as! PlaylistVC
+            viewController.userModel = userModel
             self.navigationController?.pushViewController(viewController, animated: true)
         case 1: ()
         case 2: ()
@@ -126,6 +138,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     
     @IBAction func capturePressed() {
         userModel.addCurrentTrackToPlaylist()
+        // send notification
     }
     
 

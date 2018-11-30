@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         print("Button")
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
-        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistModifyPrivate, .playlistReadPrivate, .userLibraryRead, .userLibraryModify, .userReadCurrentlyPlaying]
+        let scope: SPTScope = [.appRemoteControl, .playlistModifyPublic, .playlistModifyPrivate, .playlistReadPrivate, .userLibraryRead, .userLibraryModify, .userReadCurrentlyPlaying, .playlistReadCollaborative]
         delegate.sessionManager.initiateSession(with: scope, options: .default)
         
         print("Button Pressed")

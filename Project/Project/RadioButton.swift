@@ -19,7 +19,7 @@ public class RadioButton: UIButton {
             circleLayer.strokeColor = circleColor.cgColor
         }
     }
-    @IBInspectable public var fillCircleColor: UIColor = UIColor.green {
+    @IBInspectable public var fillCircleColor: UIColor = UIColor.blue {
         didSet {
             loadFillCircleState()
         }

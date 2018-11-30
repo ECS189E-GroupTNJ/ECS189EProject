@@ -8,12 +8,60 @@
 
 import Foundation
 
+class Storage {
+    static var currentPlaylistID: String? {
+        get {
+            return UserDefaults.standard.string(forKey: "currentPlaylistID")
+        }
+        
+        set(currPlaylistIndex) {
+            UserDefaults.standard.set(currPlaylistIndex, forKey: "currentPlaylistID")
+            print("Current playlist ID was saved as \(UserDefaults.standard.synchronize())")
+        }
+    }
+    
+    static var playlistList: [(String, String, CIImage?)] {
+        get {
+            UserDefaults.standard.register(defaults: ["playlistList" : []])
+            return UserDefaults.standard.array(forKey: "playlistList") as? [(String, String, CIImage?)] ?? []
+        }
+        
+        set(playlistList) {
+            UserDefaults.standard.set(playlistList, forKey: "playlistList")
+            print("Current index number was saved")
+        }
+    }
+    
+    static var sendNotification: Bool? {
+        get {
+            UserDefaults.standard.register(defaults: ["sendNotification" : false])
+            return UserDefaults.standard.bool(forKey: "sendNotification")
+        }
+        set(sendNotification) {
+            UserDefaults.standard.set(sendNotification, forKey: "sendNotification")
+            print("Send notification setting was saved as \(UserDefaults.standard.synchronize())")
+        }
+    }
+    
+    static var receiveNotification: Bool? {
+        get {
+            UserDefaults.standard.register(defaults: ["receiveNotification" : false])
+            return UserDefaults.standard.bool(forKey: "sendNotification")
+        }
+        set(sendNotification) {
+            UserDefaults.standard.set(sendNotification, forKey: "sendNotification")
+            print("Send notification setting was saved as \(UserDefaults.standard.synchronize())")
+        }
+    }
+}
+
 class SpotifyUserModel {
     
     typealias ApiCompletion = ((_ response: [String: Any]?) -> Void)
     
     let baseURL = "https://api.spotify.com/v1"
-    var playlistList: [(String, String, UIImage)] = []
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+    var playlistList: [(String, String, CIImage?)] = []
     var currentPlaylistIndex: Int?
     let defaultPlaylistName = "default"
     
@@ -25,17 +73,26 @@ class SpotifyUserModel {
     }
     
     struct TrackInfo {
-        let albumImage: UIImage
+        let albumImage: CIImage?
         let artistName: String
         let trackName: String
     }
     
-     init() {
+    init(forTheFirstTime withValues: Bool) {
+        if withValues {
+            playlistList = Storage.playlistList
+            if let currentID = Storage.currentPlaylistID {
+                for (index, playlist) in playlistList.enumerated() {
+                    if currentID == playlist.1 {
+                        currentPlaylistIndex = index
+                        break
+                    }
+                }
+            }
+        }
      }
     
     func SpotifyAPI(endpoint: String, param: [String: Any]?, completion: @escaping ApiCompletion) {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        
         // need to get proper access token, waiting for authentication process
         
         guard let url = URL(string: endpoint), let accessToken = delegate.appRemote.connectionParameters.accessToken else {
@@ -94,24 +151,42 @@ class SpotifyUserModel {
         DispatchQueue.global(qos: .userInitiated).async { completion(responseData) }
     }
     
-    func imageGET(at endpoint: String, completion: @escaping ((_ data: Data?) -> Void)) {
+    func imageGET(at endpoint: String, completion: @escaping ((_ data: CIImage?) -> Void)) {
         guard let url = URL(string: endpoint) else {
+            DispatchQueue.global(qos: .userInitiated).async { completion(nil) }
             return
         }
         
-        let session = URLSession(configuration: configuration())
+        if let data = try? Data(contentsOf: url) {
+            DispatchQueue.global(qos: .userInitiated).async { completion(CIImage(data: data)) }
+        }
+        else {
+            DispatchQueue.global(qos: .userInitiated).async { completion(nil) }
+        }
+        
+        /*
+        let session = URLSession(configuration: .default)
         var request = URLRequest(url: url)
+        print(url.absoluteString)
         request.httpMethod = "GET"
         
-        session.dataTask(with: request) { (data, response, error) in
+        session.dataTask(with: url) { (data, response, error) in
+            print("Try get image")
             if let httpResponse = response as? HTTPURLResponse {
+                print("\(httpResponse.statusCode)")
                 if httpResponse.statusCode != 200 && httpResponse.statusCode != 201 {
                     DispatchQueue.global(qos: .userInitiated).async { completion(nil) }
                     return
                 }
             }
-            DispatchQueue.global(qos: .userInitiated).async { completion(data) }
+            if let realData = data {
+                DispatchQueue.global(qos: .userInitiated).async { completion(CIImage(data: realData)) }
+            }
+            else {
+                DispatchQueue.global(qos: .userInitiated).async { completion(nil) }
+            }
         }
+ */
     }
     
     func getCurrentTrackInfo() -> TrackInfo {
@@ -119,7 +194,7 @@ class SpotifyUserModel {
         
         guard let track = delegate.currentTrack?.uri else {
             print("Track not identified")
-            return TrackInfo(albumImage: UIImage(named: "defaultCover")!, artistName: "", trackName: "")
+            return TrackInfo(albumImage: nil, artistName: "", trackName: "")
         }
         
         let id = String(track.suffix(from: track.index(track.startIndex, offsetBy: 14)))
@@ -131,7 +206,7 @@ class SpotifyUserModel {
         let getTrackURL = "https://api.spotify/v1/tracks/\(track)"
         let trackTitle = (UIApplication.shared.delegate as! AppDelegate).currentTrack?.name ?? ""
         var artistNames = ""
-        var cover = UIImage(named: "defaultCover")!
+        var cover: CIImage? = nil
         
         SpotifyAPI(endpoint: getTrackURL, param: nil) { (response) in
             guard let realResponse = response else {
@@ -159,8 +234,8 @@ class SpotifyUserModel {
                 
                 getImageBarrier.enter()
                 self.imageGET(at: imageURL) { (data) in
-                    if let image = data, let albumImage = UIImage(data: image){
-                        cover = albumImage
+                    if let image = data {
+                        cover = image
                     }
                     getImageBarrier.leave()
                 }
@@ -195,7 +270,7 @@ class SpotifyUserModel {
             return
         }
         
-        if currentPlaylistIndex == -1 && getPlaylistIndexOf(playlistName: defaultPlaylistName) == -1 {
+        if self.currentPlaylistIndex == nil && getPlaylistIndexOf(playlistName: defaultPlaylistName) == nil {
             getDefaultPlaylist()
         }
         
@@ -204,7 +279,7 @@ class SpotifyUserModel {
     
     
     func addTrackToPlaylist(track: String) {
-        guard let playlistIndex = currentPlaylistIndex else {
+        guard let playlistIndex = self.currentPlaylistIndex else {
             print("Error with the index of the playlist");
             return
         }
@@ -256,7 +331,7 @@ class SpotifyUserModel {
         let postPlaylistURL = "\(self.baseURL)/me/playlists"
         self.SpotifyAPI(endpoint: postPlaylistURL, param: ["name": name, "public": false, "description": "Auto-created playlist for the app"]) { (response) in
             if let realResponse = response, let id = realResponse["id"] as? String {
-                self.playlistList.insert((name, id, UIImage(named: "defaultCover")!), at: 0)
+                self.playlistList.insert((name, id, nil), at: 0)
                 self.currentPlaylistIndex = 0
             }
             if let barrier = barrier {
@@ -275,12 +350,13 @@ class SpotifyUserModel {
         return nil
     }
     
-    func updatePlaylists() {
+    func updatePlaylists(completion: @escaping () -> Void) {
         let getPlaylistURL = "\(baseURL)/me/playlists?limit=50"
         let getPlaylistQueue = DispatchQueue(label: "get playlist queue")
-        var updatedPlaylistList: [(String, String, UIImage)] = []
+        self.currentPlaylistIndex = nil
+        playlistList = []
         
-        getPlaylistQueue.sync {
+        getPlaylistQueue.async {
             var next: String? = getPlaylistURL
             let nextBarrier = DispatchGroup()
             while next != nil {
@@ -289,6 +365,7 @@ class SpotifyUserModel {
                 self.SpotifyAPI(endpoint: next!, param: nil) { (response) in
                     guard let realResponse = response else {
                         print("Error accesing server")
+                        nextBarrier.leave()
                         return
                     }
                     
@@ -296,27 +373,37 @@ class SpotifyUserModel {
                         print("Get Playlists item error")
                         return
                     }
+                    print(items.count)
                     for playlist in items {
-                        var image = UIImage(named: "defaultCover")!
+                        var image: CIImage? = nil
                         
-                        if let imageURL = (playlist["images"] as? [[String: Any]])?[0]["url"] as? String {
-                            imageBarrier.enter()
-                            self.imageGET(at: imageURL) { (data) in
-                                guard let realData = data else {
-                                    print("Unable to retrieve album image")
-                                    return
+                        if let images = playlist["images"] as? [[String: Any]] {
+                            if images.count > 0, let imageURL = images[0]["url"] as? String {
+                                imageBarrier.enter()
+                                self.imageGET(at: imageURL) { (data) in
+                                    guard let realData = data else {
+                                        print("Unable to retrieve album image")
+                                        imageBarrier.leave()
+                                        return
+                                    }
+                                    image = realData
+                                    imageBarrier.leave()
                                 }
-                                image = UIImage(data: realData) ?? UIImage(named: "defaultCover")!
-                                imageBarrier.leave()
                             }
-                            
                         }
+                        
                         guard let name = playlist["name"] as? String, let id = playlist["id"] as? String else {
                             print("Playlist does not have name or id")
                             return
                         }
+                        
+                        if let currID = Storage.currentPlaylistID, currID == id {
+                            self.currentPlaylistIndex = self.playlistList.count
+                        }
+                        
                         imageBarrier.wait()
-                        updatedPlaylistList.append((name, id, image))
+                        self.playlistList.append((name, id, image))
+                        DispatchQueue.main.async { completion() }
                     }
                     
                     if let nextURL = realResponse["next"] as? String {
@@ -325,12 +412,14 @@ class SpotifyUserModel {
                     else {
                         next = nil
                     }
+                    
                     nextBarrier.leave()
                 }
                 nextBarrier.wait()
             }
+            
         }
-        self.playlistList = updatedPlaylistList
+        Storage.playlistList = playlistList
         
     }
  
