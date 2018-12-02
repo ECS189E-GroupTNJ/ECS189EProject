@@ -50,6 +50,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         // Connection was successful, you can begin issuing commands
         self.appRemote.playerAPI?.delegate = self
+        let userModel = SpotifyUserModel(forTheFirstTime: false)
+        userModel.SpotifyAPI(endpoint: "https://api.spotify.com/v1/me", param: nil) { (response) in
+            guard let id = response?["id"] as? String else {
+                print("Could not get user ID")
+                return
+            }
+            Storage.userID = id
+        }
         print("HERE")
         /*
         self.appRemote.playerAPI?.getPlayerState({ (data, error) in

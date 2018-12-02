@@ -20,6 +20,17 @@ class Storage {
         }
     }
     
+    static var userID: String {
+        get {
+            return UserDefaults.standard.string(forKey: "userID") ?? ""
+        }
+        
+        set(currentPlaylistID) {
+            UserDefaults.standard.set(currentPlaylistID, forKey: "userID")
+            print("User ID was saved as \(UserDefaults.standard.synchronize())")
+        }
+    }
+    
     static var playlistList: [(String, String, CIImage?)] {
         get {
             UserDefaults.standard.register(defaults: ["playlistList" : []])
@@ -32,7 +43,7 @@ class Storage {
         }
     }
     
-    static var sendNotification: Bool? {
+    static var sendNotification: Bool {
         get {
             UserDefaults.standard.register(defaults: ["sendNotification" : false])
             return UserDefaults.standard.bool(forKey: "sendNotification")
@@ -43,13 +54,24 @@ class Storage {
         }
     }
     
-    static var receiveNotification: Bool? {
+    static var receiveNotification: Bool {
         get {
             UserDefaults.standard.register(defaults: ["receiveNotification" : false])
-            return UserDefaults.standard.bool(forKey: "sendNotification")
+            return UserDefaults.standard.bool(forKey: "receiveNotification")
         }
         set(sendNotification) {
-            UserDefaults.standard.set(sendNotification, forKey: "sendNotification")
+            UserDefaults.standard.set(sendNotification, forKey: "receiveNotification")
+            print("Send notification setting was saved as \(UserDefaults.standard.synchronize())")
+        }
+    }
+    
+    static var useSmartSelection: Bool {
+        get {
+            UserDefaults.standard.register(defaults: ["useSmartSelection" : false])
+            return UserDefaults.standard.bool(forKey: "useSmartSelection")
+        }
+        set(sendNotification) {
+            UserDefaults.standard.set(sendNotification, forKey: "useSmartSelection")
             print("Send notification setting was saved as \(UserDefaults.standard.synchronize())")
         }
     }
@@ -62,6 +84,8 @@ class SpotifyUserModel {
     let baseURL = "https://api.spotify.com/v1"
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var playlistList: [(String, String, CIImage?)] = []
+    var playlistStats: [String: (Double, Double, Double, Double, Double)] = [:]
+    let statsCollectionBarrier = DispatchGroup()
     var currentPlaylistIndex: Int?
     let defaultPlaylistName = "default"
     
@@ -82,15 +106,20 @@ class SpotifyUserModel {
         if withValues {
             playlistList = Storage.playlistList
             if let currentID = Storage.currentPlaylistID {
-                for (index, playlist) in playlistList.enumerated() {
-                    if currentID == playlist.1 {
-                        currentPlaylistIndex = index
-                        break
-                    }
-                }
+                self.currentPlaylistIndex = getPlaylistIndexOf(ID: currentID)
             }
         }
      }
+    
+    func getPlaylistIndexOf(ID: String) -> Int? {
+        for (index, playlist) in playlistList.enumerated() {
+            if ID == playlist.1 {
+                return index
+            }
+        }
+        
+        return nil
+    }
     
     func SpotifyAPI(endpoint: String, param: [String: Any]?, completion: @escaping ApiCompletion) {
         // need to get proper access token, waiting for authentication process
@@ -189,6 +218,54 @@ class SpotifyUserModel {
  */
     }
     
+    func setSmartChoiceForCurrentTrack() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        
+        guard let track = delegate.currentTrack?.uri else {
+            print("Track not identified")
+            return
+        }
+        
+        let id = String(track.suffix(from: track.index(track.startIndex, offsetBy: 14)))
+        
+        setSmartChoice(for: id)
+    }
+    
+    func setSmartChoice(for track: String) {
+        let getAudioFeatureURL = "https://api.spotify.com/v1/audio-features/\(track)"
+        SpotifyAPI(endpoint: getAudioFeatureURL, param: nil) { (response) in
+            guard let features = response?["audio_features"] as? [[String: Any]] else {
+                print("Couldn't get audio feature")
+                return
+            }
+            
+            if features.count == 0 {
+                return
+            }
+            
+            guard let danceability = features[0]["danceability"] as? Double, let energy = features[0]["energy"] as? Double, let loudness = features[0]["loudness"] as? Double, let tempo = features[0]["tempo"] as? Double, let valence = features[0]["valence"] as? Double else {
+                print("Error parsing audio feature")
+                return
+            }
+            
+            self.statsCollectionBarrier.wait()
+            
+            var min = 5.0
+            
+            for (index, playlist) in self.playlistList.enumerated() {
+                if let stat = self.playlistStats[playlist.1] {
+                    let dist = pow(stat.0 - danceability, 2) + pow(stat.1 - energy, 2) + pow(stat.2 - loudness, 2) + pow(stat.3 - tempo, 2) + pow(stat.4 - valence, 2)
+                    if dist < min {
+                        min = dist
+                        self.currentPlaylistIndex = index
+                        Storage.currentPlaylistID = playlist.1
+                    }
+                }
+            }
+            
+        }
+    }
+    
     func getCurrentTrackInfo() -> TrackInfo {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
@@ -285,6 +362,10 @@ class SpotifyUserModel {
         }
         
         let playlistID = playlistList[playlistIndex].1
+        if let currentID = Storage.currentPlaylistID, playlistID != currentID {
+            self.currentPlaylistIndex = getPlaylistIndexOf(ID: currentID)
+        }
+        
         var postTrackURL = "\(baseURL)/playlists/\(playlistID)/tracks"
         
         SpotifyAPI(endpoint: postTrackURL, param: ["uris": [track]]) { (response) in
@@ -317,6 +398,7 @@ class SpotifyUserModel {
                 }
                 else {
                     self.currentPlaylistIndex = index
+                    Storage.currentPlaylistID = self.playlistList[index].1
                     defaultPlaylistBarrier.leave()
                 }
             }
@@ -333,6 +415,7 @@ class SpotifyUserModel {
             if let realResponse = response, let id = realResponse["id"] as? String {
                 self.playlistList.insert((name, id, nil), at: 0)
                 self.currentPlaylistIndex = 0
+                Storage.currentPlaylistID = self.playlistList[0].1
             }
             if let barrier = barrier {
                 barrier.leave()
@@ -401,9 +484,17 @@ class SpotifyUserModel {
                             self.currentPlaylistIndex = self.playlistList.count
                         }
                         
+                        if playlist["collaborative"] as? Bool == false, (playlist["owner"] as? [String: Any])?["id"] as? String != Storage.userID {
+                            continue
+                        }
+                        
                         imageBarrier.wait()
                         self.playlistList.append((name, id, image))
                         DispatchQueue.main.async { completion() }
+                        
+                        if Storage.useSmartSelection {
+                            self.computeStatsForPlaylist(playlist, withID: id)
+                        }
                     }
                     
                     if let nextURL = realResponse["next"] as? String {
@@ -417,10 +508,64 @@ class SpotifyUserModel {
                 }
                 nextBarrier.wait()
             }
-            
+            Storage.playlistList = self.playlistList
         }
-        Storage.playlistList = playlistList
         
+    }
+    
+    func computeStatsForPlaylist(_ playlist: [String: Any], withID id: String) {
+        self.statsCollectionBarrier.enter()
+        DispatchQueue.global(qos: .default).async {
+            // start stats collection
+            guard let getTracksURL = (playlist["tracks"] as? [String: Any])?["href"] as? String else {
+                print("Could not get tracks for the playlist")
+                self.statsCollectionBarrier.leave()
+                return
+            }
+            
+            self.SpotifyAPI(endpoint: getTracksURL, param: nil) { (response) in
+                guard let realResponse = response?["items"] as? [[String: Any]] else {
+                    print("Error getting tracks from the playlist")
+                    self.statsCollectionBarrier.leave()
+                    return
+                }
+                
+                var tracks: [String] = []
+                
+                for track in realResponse {
+                    if let trackID = (track["track"] as? [String: Any])?["id"] as? String {
+                        tracks.append(trackID)
+                    }
+                }
+                
+                let getAudioFeaturesURL = "https://api.spotify.com/v1/audio-features?ids=\(tracks.joined(separator: ","))"
+                
+                self.SpotifyAPI(endpoint: getAudioFeaturesURL, param: nil) { (response) in
+                    guard let features = response?["audio_features"] as? [[String: Any]] else {
+                        print("Couldn't get audio features")
+                        self.statsCollectionBarrier.leave()
+                        return
+                    }
+                    self.processAudioFeatures(features, forPlaylistID: id)
+                }
+            }
+        }
+    }
+    
+    func processAudioFeatures(_ features: [[String: Any]], forPlaylistID id: String) {
+        var danceability = 0.0, energy = 0.0, loudness = 0.0, tempo = 0.0, valence = 0.0
+        
+        for feature in features {
+            if let d = feature["danceability"] as? Double, let e = feature["energy"] as? Double, let l = feature["loudness"] as? Double, let t = feature["tempo"] as? Double, let v = feature["valence"] as? Double {
+                danceability += d
+                energy += e
+                loudness += l / -60.0
+                tempo += t
+                valence += v
+            }
+        }
+        self.playlistStats[id] = (danceability, energy, loudness, tempo, valence)
+        self.statsCollectionBarrier.leave()
     }
  
 }
