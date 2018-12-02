@@ -14,8 +14,8 @@ class Storage {
             return UserDefaults.standard.string(forKey: "currentPlaylistID")
         }
         
-        set(currentPlaylistID) {
-            UserDefaults.standard.set(currentPlaylistID, forKey: "currentPlaylistID")
+        set(currPlaylistIndex) {
+            UserDefaults.standard.set(currPlaylistIndex, forKey: "currentPlaylistID")
             print("Current playlist ID was saved as \(UserDefaults.standard.synchronize())")
         }
     }
@@ -317,7 +317,6 @@ class SpotifyUserModel {
                 }
                 else {
                     self.currentPlaylistIndex = index
-                    Storage.currentPlaylistID = self.playlistList[index].1
                     defaultPlaylistBarrier.leave()
                 }
             }
@@ -334,7 +333,6 @@ class SpotifyUserModel {
             if let realResponse = response, let id = realResponse["id"] as? String {
                 self.playlistList.insert((name, id, nil), at: 0)
                 self.currentPlaylistIndex = 0
-                Storage.currentPlaylistID = self.playlistList[0].1
             }
             if let barrier = barrier {
                 barrier.leave()

@@ -9,5 +9,5 @@
 #define TestSpotifyApp_Bridging_Header_h
 
 #include <SpotifyiOS/SpotifyiOS.h>
-
+#import <GNSMessages.h>
 #endif /* TestSpotifyApp_Bridging_Header_h */

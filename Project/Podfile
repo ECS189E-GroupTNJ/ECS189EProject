@@ -10,7 +10,7 @@ platform :ios, '12.0'
     # Send notification to people in the car
     pod 'PeriscommentView'
     pod 'SnapKit', '~> 4.2.0'
-
+    pod 'NearbyMessages'
 end
 
 post_install do |installer|

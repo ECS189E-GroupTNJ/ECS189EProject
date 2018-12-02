@@ -22,6 +22,7 @@
 		3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC221ACC7540095D177 /* RoundButton.swift */; };
 		3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */; };
 		66BE070ADBC0FA16864DB4BF /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E702903F6E086933607E390B /* Pods_Project.framework */; };
+		745F07A321B3629D00164DC0 /* NearbyMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongVC.swift; sourceTree = "<group>"; };
 		3FA64AC221ACC7540095D177 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVC.swift; sourceTree = "<group>"; };
+		745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageModel.swift; sourceTree = "<group>"; };
 		B6CC19D58B53DCCCBD264CFC /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
 		E702903F6E086933607E390B /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +130,7 @@
 				22F303DB21A56930008E9CD5 /* Main.storyboard */,
 				223633A621AE3F0A000C172C /* PlaylistTableViewCell.swift */,
 				3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */,
+				745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */,
 				3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */,
 				3FA64AC221ACC7540095D177 /* RoundButton.swift */,
 				22F303DE21A56930008E9CD5 /* Assets.xcassets */,
@@ -185,6 +188,7 @@
 				22F303D121A56930008E9CD5 /* Frameworks */,
 				22F303D221A56930008E9CD5 /* Resources */,
 				A2BBE3387BD83D9FE9C10E6C /* [CP] Embed Pods Frameworks */,
+				B6B6CF3D8A763BF062E1E81A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -328,6 +332,31 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B6B6CF3D8A763BF062E1E81A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-resources.sh",
+				"${PODS_ROOT}/NearbyMessages/Resources/resources/GNSSharedResources.bundle",
+				"${PODS_ROOT}/NearbyMessages/Resources/resources/ic_expand_more.xcassets",
+				"${PODS_ROOT}/NearbyMessages/Resources/resources/ic_nearby_48pt.xcassets",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GNSSharedResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E215089F4D7E1727F2F6204A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -360,6 +389,7 @@
 				22F303DA21A56930008E9CD5 /* ViewController.swift in Sources */,
 				223633A521AE3C0D000C172C /* RadioButton.swift in Sources */,
 				3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */,
+				745F07A321B3629D00164DC0 /* NearbyMessageModel.swift in Sources */,
 				223633A721AE3F0A000C172C /* PlaylistTableViewCell.swift in Sources */,
 				3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */,
 				228C6EC321A6548F008DA3A0 /* SpotifyUserModel.swift in Sources */,
@@ -541,7 +571,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53347YPQGL;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -567,7 +597,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 53347YPQGL;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
