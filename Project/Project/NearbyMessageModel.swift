@@ -7,15 +7,37 @@
 //
 
 import Foundation
+import CoreBluetooth
+
 class NearbyMessageModel{
 
     var nearbyPermission: GNSPermission?
-    var messageManager = GNSMessageManager(apiKey: "AIzaSyBohnv6pY_vypGpIV8osHPc6jL6GB3gjmA")
+    var messageManager = GNSMessageManager(apiKey: "ourAPIKey")
     var publication: GNSPublication?
     var subscription: GNSSubscription?
     
-    //AIzaSyBohnv6pY_vypGpIV8osHPc6jL6GB3gjmA
     var messages = [String]()
+    
+    func bluetoothAvailable(_ central: CBCentralManager){
+        if central.state == .poweredOff{
+            Print("Bluetooth switched off or not initialized")
+            return false
+        }else{
+            switch CBPeripheralManager.authorizationStatus(){
+            case .authorized:
+                print("Bluetooth authorized")
+                return true
+            case .denied:
+                print("Bluetooth not authorized")
+                return false
+            case .notDetermined:
+                print("not determined")
+                return false
+            default:
+                return true
+            }
+        }
+    }
     
     func shareMessage(withName name: String) {
         
