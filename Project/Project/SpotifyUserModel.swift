@@ -31,6 +31,17 @@ class Storage {
         }
     }
     
+    static var displayName: String {
+        get {
+            return UserDefaults.standard.string(forKey: "displayName") ?? ""
+        }
+        
+        set(displayName) {
+            UserDefaults.standard.set(currentPlaylistID, forKey: "displayName")
+            print("Display name was saved as \(UserDefaults.standard.synchronize())")
+        }
+    }
+    
     static var playlistList: [(String, String, CIImage?)] {
         get {
             UserDefaults.standard.register(defaults: ["playlistList" : []])
@@ -61,7 +72,7 @@ class Storage {
         }
         set(sendNotification) {
             UserDefaults.standard.set(sendNotification, forKey: "receiveNotification")
-            print("Send notification setting was saved as \(UserDefaults.standard.synchronize())")
+            print("Receive notification setting was saved as \(UserDefaults.standard.synchronize())")
         }
     }
     
@@ -347,15 +358,17 @@ class SpotifyUserModel {
             return
         }
         
-        if self.currentPlaylistIndex == nil && getPlaylistIndexOf(playlistName: defaultPlaylistName) == nil {
-            getDefaultPlaylist()
-        }
+        
         
         addTrackToPlaylist(track: track)
     }
     
     
     func addTrackToPlaylist(track: String) {
+        if self.currentPlaylistIndex == nil && getPlaylistIndexOf(playlistName: defaultPlaylistName) == nil {
+            getDefaultPlaylist()
+        }
+        
         guard let playlistIndex = self.currentPlaylistIndex else {
             print("Error with the index of the playlist");
             return

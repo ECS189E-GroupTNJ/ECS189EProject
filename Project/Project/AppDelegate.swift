@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
@@ -52,11 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
         self.appRemote.playerAPI?.delegate = self
         let userModel = SpotifyUserModel(forTheFirstTime: false)
         userModel.SpotifyAPI(endpoint: "https://api.spotify.com/v1/me", param: nil) { (response) in
-            guard let id = response?["id"] as? String else {
+            guard let id = response?["id"] as? String, let displayName = response?["display_name"] as? String else {
                 print("Could not get user ID")
                 return
             }
             Storage.userID = id
+            Storage.displayName = displayName
         }
         print("HERE")
         /*
@@ -116,6 +118,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if !granted {
+                print(error?.localizedDescription ?? "Error not found")
+            }
+        }
+        
         return true
     }
     
