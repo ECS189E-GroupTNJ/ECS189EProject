@@ -1,6 +1,22 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
+## GoogleInterchangeUtilities
+
+Copyright 2016 Google
+
+## GoogleNetworkingUtilities
+
+Copyright 2016 Google
+
+## GoogleSymbolUtilities
+
+Copyright 2016 Google
+
+## GoogleUtilitiesLegacy
+
+Copyright 2018 Google
+
 ## LiquidFloatingActionButton
 
 Copyright (c) 2015 Takuma Yoshida <yoa.jmpr.w@gmail.com>
@@ -23,6 +39,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
+
+## NearbyMessages
+
+Copyright 2016 Google
 
 ## PeriscommentView
 

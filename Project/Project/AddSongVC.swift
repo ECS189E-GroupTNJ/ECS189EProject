@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import LiquidFloatingActionButton
+import UserNotifications
 
 public class CustomCell : LiquidFloatingCell {
     var name: String = "sample"
@@ -38,7 +39,7 @@ public class CustomCell : LiquidFloatingCell {
 }
 
 
-class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource {
+class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource, UNUserNotificationCenterDelegate {
     func numberOfCells(_ liquidFloatingActionButton: LiquidFloatingActionButton) -> Int {
         return settingCells.count
     }
@@ -80,6 +81,8 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     @IBOutlet weak var captureButton: UIButton!
     
     var userModel = SpotifyUserModel(forTheFirstTime: true)
+    var addedTrackID: String?
+    var addedTrackInfo: SpotifyUserModel.TrackInfo?
     
     var settingsButton: LiquidFloatingActionButton!
     var settingCells: [LiquidFloatingCell] = []
@@ -98,6 +101,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         captureButton.titleLabel?.adjustsFontSizeToFitWidth = true
         captureButton.titleLabel?.minimumScaleFactor = 0.5
         
+        UNUserNotificationCenter.current().delegate = self
         
         for roundButton in roundButtons {
             roundButton.cornerRadius = roundButton.frame.height / 2
@@ -136,10 +140,103 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         }
     }
     
+    func handleMessageNotification(message: GNSMessage) {
+        if UIApplication.shared.applicationState != .active {
+            
+            guard let text = String(data: message.content, encoding: .utf8) else {
+                print("Could not receive message")
+                return
+            }
+            
+            let sender = String(text.split(separator: "\n")[0])
+            let trackID = String(text.split(separator: "\n")[1])
+            
+            let trackInfo = userModel.getTrackInfo(track: trackID)
+            addedTrackID = trackID
+            addedTrackInfo = trackInfo
+            
+            let content = UNMutableNotificationContent()
+            content.title = "DriverSpotify"
+            content.subtitle = "\(sender) added a song:"
+            content.body = "\(trackInfo.trackName)\n\(trackInfo.artistName)"
+            content.categoryIdentifier = "com.ecs189e.driverspotify.notification.category"
+            var albumImage: UIImage
+            
+            if let image = trackInfo.albumImage {
+                albumImage = UIImage(ciImage: image)
+            }
+            else {
+                albumImage = UIImage(named: "defaultCover")!
+            }
+            
+            if let attachment = UNNotificationAttachment.create(identifier: ProcessInfo.processInfo.globallyUniqueString, image: albumImage, options: nil) {
+                content.attachments = [attachment]
+            }
+            
+            let action = UNNotificationAction(identifier: "add", title: "Add", options: [.foreground])
+            let category = UNNotificationCategory(identifier: "com.ecs189e.driverspotify.notification.category", actions: [action], intentIdentifiers: [], options: [])
+            
+            UNUserNotificationCenter.current().setNotificationCategories([category])
+            let request = UNNotificationRequest(identifier: "addSongRequest", content: content, trigger: nil)
+            
+            UNUserNotificationCenter.current().add(request) { (error) in
+                print("\(error?.localizedDescription ?? "")")
+            }
+        }
+        else {
+            // popup for query
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        guard let trackID = addedTrackID else {
+            print("Track disappeared?")
+            return
+        }
+        
+        if response.actionIdentifier == "add" {
+            userModel.addTrackToPlaylist(track: trackID)
+        }
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        // display for popup thing
+        
+        completionHandler([])
+    }
+    
+    
+    
+    
     @IBAction func capturePressed() {
         userModel.addCurrentTrackToPlaylist()
         // send notification
     }
     
 
+}
+
+extension UNNotificationAttachment {
+    
+    static func create(identifier: String, image: UIImage, options: [NSObject : AnyObject]?) -> UNNotificationAttachment? {
+        let fileManager = FileManager.default
+        let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
+        let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
+        do {
+            try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
+            let imageFileIdentifier = identifier+".png"
+            let fileURL = tmpSubFolderURL.appendingPathComponent(imageFileIdentifier)
+            guard let imageData = image.pngData() else {
+                return nil
+            }
+            try imageData.write(to: fileURL)
+            let imageAttachment = try UNNotificationAttachment.init(identifier: imageFileIdentifier, url: fileURL, options: options)
+            return imageAttachment
+        } catch {
+            print("error " + error.localizedDescription)
+        }
+        return nil
+    }
 }

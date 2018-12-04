@@ -8,19 +8,30 @@
 
 import Foundation
 import CoreBluetooth
+import UserNotifications
 
 class NearbyMessageModel{
 
     var nearbyPermission: GNSPermission?
-    var messageManager = GNSMessageManager(apiKey: "ourAPIKey")
+    var messageManager = GNSMessageManager(apiKey: "AIzaSyCcgDrcE6R4Hka4F1INzKEQBnyhBmfRo5Y", paramsBlock: { (params: GNSMessageManagerParams?) in
+        guard let params = params else { print("Message manager error"); return }
+        params.bluetoothPowerErrorHandler = { (hasError: Bool) in
+            // Update the UI for Bluetooth power
+            print("Bluetooth not turned on")
+        }
+        params.bluetoothPermissionErrorHandler = { (hasError: Bool) in
+            // Update the UI for Bluetooth permission
+            print("Bluetooth permission not granted")
+        }
+    })
     var publication: GNSPublication?
     var subscription: GNSSubscription?
     
     var messages = [String]()
     
-    func bluetoothAvailable(_ central: CBCentralManager){
+    func bluetoothAvailable(_ central: CBCentralManager) -> Bool {
         if central.state == .poweredOff{
-            Print("Bluetooth switched off or not initialized")
+            print("Bluetooth switched off or not initialized")
             return false
         }else{
             switch CBPeripheralManager.authorizationStatus(){
@@ -39,23 +50,50 @@ class NearbyMessageModel{
         }
     }
     
-    func shareMessage(withName name: String) {
-        
+    func shareMessage(with trackID: String) {
+        let text = "\(Storage.displayName)\n\(trackID)"
         if let messageManager = self.messageManager{
-            messageManager.setDebugLoggingEnabled(true)
-            let message: GNSMessage = GNSMessage(content: name.data(using: .utf8, allowLossyConversion: true))
-            publication = messageManager.publication(with: message)
+            GNSMessageManager.setDebugLoggingEnabled(true)
+            let message: GNSMessage = GNSMessage(content: text.data(using: .utf8, allowLossyConversion: true))
+            publication = messageManager.publication(with: message,
+                paramsBlock: { (params: GNSPublicationParams?) in
+                    guard let params = params else { return }
+                    params.strategy = GNSStrategy(paramsBlock: { (params: GNSStrategyParams?) in
+                        guard let params = params else { return }
+                        params.discoveryMediums = .BLE
+                })
+            })
         }
     }
     
-//    func receiveMessage(){
-//        if let messageManager = self.messageManager{
- //           subscription =
- //       }
+    func toggleSendNotification() {
+        Storage.sendNotification = !Storage.sendNotification
+    }
     
-    func stopNearbyMessaging(){
-        publication = nil
-        subscription = nil
+    func toggleReceiveNotification(callback: @escaping (_ message: GNSMessage) -> Void) {
+        Storage.receiveNotification = !Storage.receiveNotification
+        if let messageManager = self.messageManager{
+            subscription =
+                messageManager.subscription(messageFoundHandler: { (message: GNSMessage?) in
+                    guard let realMessage = message else {
+                        print("Message not received?")
+                        return
+                    }
+                    DispatchQueue.main.async { callback(realMessage) }
+                },
+                messageLostHandler: { (message: GNSMessage?) in
+                    print("Message no longer received")
+                    
+                },
+                paramsBlock:{ (params: GNSSubscriptionParams?) in
+                    guard let params = params else { return }
+                    params.strategy = GNSStrategy(paramsBlock: { (params: GNSStrategyParams?) in
+                        guard let params = params else { return }
+                        params.allowInBackground = true
+                        params.discoveryMediums = .BLE
+                })
+            })
+        }
     }
     
 //    func grantPermission(){
