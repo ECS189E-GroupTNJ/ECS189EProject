@@ -72,27 +72,29 @@ class NearbyMessageModel{
     
     func toggleReceiveNotification(callback: @escaping (_ message: GNSMessage) -> Void) {
         Storage.receiveNotification = !Storage.receiveNotification
-        if let messageManager = self.messageManager{
-            subscription =
-                messageManager.subscription(messageFoundHandler: { (message: GNSMessage?) in
-                    guard let realMessage = message else {
-                        print("Message not received?")
-                        return
-                    }
-                    DispatchQueue.main.async { callback(realMessage) }
-                },
-                messageLostHandler: { (message: GNSMessage?) in
-                    print("Message no longer received")
-                    
-                },
-                paramsBlock:{ (params: GNSSubscriptionParams?) in
-                    guard let params = params else { return }
-                    params.strategy = GNSStrategy(paramsBlock: { (params: GNSStrategyParams?) in
+        if Storage.receiveNotification {
+            if let messageManager = self.messageManager{
+                subscription =
+                    messageManager.subscription(messageFoundHandler: { (message: GNSMessage?) in
+                        guard let realMessage = message else {
+                            print("Message not received?")
+                            return
+                        }
+                        DispatchQueue.main.async { callback(realMessage) }
+                    },
+                    messageLostHandler: { (message: GNSMessage?) in
+                        print("Message no longer received")
+                        
+                    },
+                    paramsBlock:{ (params: GNSSubscriptionParams?) in
                         guard let params = params else { return }
-                        params.allowInBackground = true
-                        params.discoveryMediums = .BLE
+                        params.strategy = GNSStrategy(paramsBlock: { (params: GNSStrategyParams?) in
+                            guard let params = params else { return }
+                            params.allowInBackground = true
+                            params.discoveryMediums = .BLE
+                    })
                 })
-            })
+            }
         }
     }
     

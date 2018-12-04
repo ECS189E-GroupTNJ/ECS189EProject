@@ -42,14 +42,14 @@ class Storage {
         }
     }
     
-    static var playlistList: [(String, String, CIImage?)] {
+    static var playlistIDList: [String] {
         get {
-            UserDefaults.standard.register(defaults: ["playlistList" : []])
-            return UserDefaults.standard.array(forKey: "playlistList") as? [(String, String, CIImage?)] ?? []
+            UserDefaults.standard.register(defaults: ["playlistIDList" : []])
+            return UserDefaults.standard.array(forKey: "playlistIDList") as? [String] ?? []
         }
         
-        set(playlistList) {
-            UserDefaults.standard.set(playlistList, forKey: "playlistList")
+        set(playlistIDList) {
+            UserDefaults.standard.set(playlistIDList, forKey: "playlistIDList")
             print("Current index number was saved")
         }
     }
@@ -115,7 +115,6 @@ class SpotifyUserModel {
     
     init(forTheFirstTime withValues: Bool) {
         if withValues {
-            playlistList = Storage.playlistList
             if let currentID = Storage.currentPlaylistID {
                 self.currentPlaylistIndex = getPlaylistIndexOf(ID: currentID)
             }
@@ -123,8 +122,8 @@ class SpotifyUserModel {
      }
     
     func getPlaylistIndexOf(ID: String) -> Int? {
-        for (index, playlist) in playlistList.enumerated() {
-            if ID == playlist.1 {
+        for (index, playlist) in Storage.playlistIDList.enumerated() {
+            if ID == playlist {
                 return index
             }
         }
@@ -245,7 +244,7 @@ class SpotifyUserModel {
     func setSmartChoice(for track: String) {
         let getAudioFeatureURL = "https://api.spotify.com/v1/audio-features/\(track)"
         SpotifyAPI(endpoint: getAudioFeatureURL, param: nil) { (response) in
-            guard let features = response?["audio_features"] as? [[String: Any]] else {
+            guard let features = response else {
                 print("Couldn't get audio feature")
                 return
             }
@@ -254,7 +253,7 @@ class SpotifyUserModel {
                 return
             }
             
-            guard let danceability = features[0]["danceability"] as? Double, let energy = features[0]["energy"] as? Double, let loudness = features[0]["loudness"] as? Double, let tempo = features[0]["tempo"] as? Double, let valence = features[0]["valence"] as? Double else {
+            guard let danceability = features["danceability"] as? Double, let energy = features["energy"] as? Double, let loudness = features["loudness"] as? Double, let tempo = features["tempo"] as? Double, let valence = features["valence"] as? Double else {
                 print("Error parsing audio feature")
                 return
             }
@@ -265,15 +264,15 @@ class SpotifyUserModel {
             
             for (index, playlist) in self.playlistList.enumerated() {
                 if let stat = self.playlistStats[playlist.1] {
-                    let dist = pow(stat.0 - danceability, 2) + pow(stat.1 - energy, 2) + pow(stat.2 - loudness, 2) + pow(stat.3 - tempo, 2) + pow(stat.4 - valence, 2)
+                    let dist = pow(stat.0 - danceability, 2) + pow(stat.1 - energy, 2) + pow(stat.2 - loudness / -60, 2) + pow(stat.3 - tempo / 200, 2) + pow(stat.4 - valence, 2)
                     if dist < min {
                         min = dist
-                        self.currentPlaylistIndex = index
-                        Storage.currentPlaylistID = playlist.1
+                        //self.currentPlaylistIndex = index
+                        //Storage.currentPlaylistID = playlist.1
+                        print("Lowest so far: \(index)")
                     }
                 }
             }
-            
         }
     }
     
@@ -358,13 +357,15 @@ class SpotifyUserModel {
             return
         }
         
-        
-        
         addTrackToPlaylist(track: track)
     }
     
     
     func addTrackToPlaylist(track: String) {
+        if Storage.useSmartSelection {
+            setSmartChoiceForCurrentTrack()
+        }
+        
         if self.currentPlaylistIndex == nil && getPlaylistIndexOf(playlistName: defaultPlaylistName) == nil {
             getDefaultPlaylist()
         }
@@ -374,7 +375,9 @@ class SpotifyUserModel {
             return
         }
         
-        let playlistID = playlistList[playlistIndex].1
+        print("SAVE TO:",playlistIndex)
+        
+        let playlistID = Storage.playlistIDList[playlistIndex]
         if let currentID = Storage.currentPlaylistID, playlistID != currentID {
             self.currentPlaylistIndex = getPlaylistIndexOf(ID: currentID)
         }
@@ -403,7 +406,7 @@ class SpotifyUserModel {
         defaultPlaylistBarrier.enter()
         
         if let index = getPlaylistIndexOf(playlistName: defaultPlaylistName) {
-            let defaultID = playlistList[index].1
+            let defaultID = Storage.playlistIDList[index]
             let getPlaylistURL = "\(baseURL)/playlists/\(defaultID)"
             SpotifyAPI(endpoint: getPlaylistURL, param: nil) { (response) in
                 if response == nil {
@@ -411,7 +414,7 @@ class SpotifyUserModel {
                 }
                 else {
                     self.currentPlaylistIndex = index
-                    Storage.currentPlaylistID = self.playlistList[index].1
+                    Storage.currentPlaylistID = Storage.playlistIDList[index]
                     defaultPlaylistBarrier.leave()
                 }
             }
@@ -427,8 +430,9 @@ class SpotifyUserModel {
         self.SpotifyAPI(endpoint: postPlaylistURL, param: ["name": name, "public": false, "description": "Auto-created playlist for the app"]) { (response) in
             if let realResponse = response, let id = realResponse["id"] as? String {
                 self.playlistList.insert((name, id, nil), at: 0)
+                Storage.playlistIDList.insert(id, at: 0)
                 self.currentPlaylistIndex = 0
-                Storage.currentPlaylistID = self.playlistList[0].1
+                Storage.currentPlaylistID = Storage.playlistIDList[0]
             }
             if let barrier = barrier {
                 barrier.leave()
@@ -451,6 +455,7 @@ class SpotifyUserModel {
         let getPlaylistQueue = DispatchQueue(label: "get playlist queue")
         self.currentPlaylistIndex = nil
         playlistList = []
+        var playlistIDList: [String] = []
         
         getPlaylistQueue.async {
             var next: String? = getPlaylistURL
@@ -503,9 +508,11 @@ class SpotifyUserModel {
                         
                         imageBarrier.wait()
                         self.playlistList.append((name, id, image))
+                        playlistIDList.append(id)
                         DispatchQueue.main.async { completion() }
                         
                         if Storage.useSmartSelection {
+                            print("Start collecting stats")
                             self.computeStatsForPlaylist(playlist, withID: id)
                         }
                     }
@@ -521,7 +528,8 @@ class SpotifyUserModel {
                 }
                 nextBarrier.wait()
             }
-            Storage.playlistList = self.playlistList
+            Storage.playlistIDList = playlistIDList
+            print(Storage.playlistIDList.count)
         }
         
     }
@@ -559,6 +567,7 @@ class SpotifyUserModel {
                         self.statsCollectionBarrier.leave()
                         return
                     }
+                    print("Audio features received")
                     self.processAudioFeatures(features, forPlaylistID: id)
                 }
             }
@@ -566,18 +575,20 @@ class SpotifyUserModel {
     }
     
     func processAudioFeatures(_ features: [[String: Any]], forPlaylistID id: String) {
-        var danceability = 0.0, energy = 0.0, loudness = 0.0, tempo = 0.0, valence = 0.0
+        var danceability = 0.0, energy = 0.0, loudness = 0.0, tempo = 0.0, valence = 0.0, count = 0.0
         
         for feature in features {
             if let d = feature["danceability"] as? Double, let e = feature["energy"] as? Double, let l = feature["loudness"] as? Double, let t = feature["tempo"] as? Double, let v = feature["valence"] as? Double {
                 danceability += d
                 energy += e
                 loudness += l / -60.0
-                tempo += t
+                tempo += t / 200
                 valence += v
+                count += 1
             }
         }
-        self.playlistStats[id] = (danceability, energy, loudness, tempo, valence)
+        self.playlistStats[id] = (danceability / count, energy / count, loudness / count, tempo / count, valence / count)
+        print(self.playlistStats[id])
         self.statsCollectionBarrier.leave()
     }
  

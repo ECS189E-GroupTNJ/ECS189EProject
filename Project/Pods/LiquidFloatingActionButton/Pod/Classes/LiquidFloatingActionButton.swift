@@ -484,7 +484,7 @@ open class LiquidFloatingCell : LiquittableCircle {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup(_ image: UIImage, tintColor: UIColor = UIColor.white) {
+    func setup(_ image: UIImage, tintColor: UIColor = UIColor.clear) {
         imageView.image = image.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
         imageView.tintColor = tintColor
         setupView(imageView)

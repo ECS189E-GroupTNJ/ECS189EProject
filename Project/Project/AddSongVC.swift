@@ -81,6 +81,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     @IBOutlet weak var captureButton: UIButton!
     
     var userModel = SpotifyUserModel(forTheFirstTime: true)
+    var messageModel = NearbyMessageModel()
     var addedTrackID: String?
     var addedTrackInfo: SpotifyUserModel.TrackInfo?
     
@@ -120,9 +121,13 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         settingsButton = createButton(floatingFrame, .up)
         
         settingCells.append(CustomCell(icon: UIImage(named: "playlist")!, name: "select playlist"))
+        settingCells.append(CustomCell(icon: UIImage(named: "smart")!, name: "smart selection"))
         settingCells.append(CustomCell(icon: UIImage(named: "peer")!, name: "receive notification"))
         settingCells.append(CustomCell(icon: UIImage(named: "peer")!, name: "send notification"))
         
+        settingCells[1].imageView.tintColor = Storage.useSmartSelection ? UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0) : UIColor.white
+        settingCells[2].imageView.tintColor = Storage.receiveNotification ? UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0) : UIColor.white
+        settingCells[3].imageView.tintColor = Storage.sendNotification ? UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0) : UIColor.white
         
         self.view.addSubview(settingsButton)
     }
@@ -134,8 +139,35 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
             let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "playlistVC") as! PlaylistVC
             viewController.userModel = userModel
             self.navigationController?.pushViewController(viewController, animated: true)
-        case 1: ()
-        case 2: ()
+        case 1:
+            if !Storage.useSmartSelection {
+                settingCells[1].imageView.tintColor = UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0)
+                Storage.useSmartSelection = true
+            }
+            else {
+                settingCells[1].imageView.tintColor = UIColor.white
+                Storage.useSmartSelection = false
+            }
+        case 2:
+            if !Storage.receiveNotification {
+                settingCells[2].imageView.tintColor = UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0)
+                messageModel.toggleReceiveNotification { (message) in
+                    self.handleMessageNotification(message: message)
+                }
+            }
+            else {
+                settingCells[2].imageView.tintColor = UIColor.white
+                messageModel.toggleReceiveNotification(callback: { (_) in })
+            }
+        case 3:
+            if !Storage.sendNotification {
+                settingCells[3].imageView.tintColor = UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0)
+                messageModel.toggleSendNotification()
+            }
+            else {
+                settingCells[3].imageView.tintColor = UIColor.white
+                messageModel.toggleSendNotification()
+            }
         default: ()
         }
     }
