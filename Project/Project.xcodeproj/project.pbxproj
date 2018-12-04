@@ -19,9 +19,11 @@
 		22F303ED21A56930008E9CD5 /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F303EC21A56930008E9CD5 /* ProjectTests.swift */; };
 		22F303F821A56930008E9CD5 /* ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F303F721A56930008E9CD5 /* ProjectUITests.swift */; };
 		22F3040721A56A19008E9CD5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */; };
+		3F3973D921B666AC0034D548 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3973D821B666AC0034D548 /* PopUpView.xib */; };
 		3FA64AC121ACC6BE0095D177 /* AddSongVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */; };
 		3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC221ACC7540095D177 /* RoundButton.swift */; };
 		3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */; };
+		3FDEAC5B21B63B3D004FABDB /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDEAC5A21B63B3D004FABDB /* PopUpViewController.swift */; };
 		745F07A321B3629D00164DC0 /* NearbyMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +64,11 @@
 		22F3040521A569AE008E9CD5 /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
 		22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		3125A23FA772D644C4B13A1C /* Pods-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.debug.xcconfig"; sourceTree = "<group>"; };
+		3F3973D821B666AC0034D548 /* PopUpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
 		3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongVC.swift; sourceTree = "<group>"; };
 		3FA64AC221ACC7540095D177 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVC.swift; sourceTree = "<group>"; };
+		3FDEAC5A21B63B3D004FABDB /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		5DE925818B6CBF21B769BEE8 /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
 		745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageModel.swift; sourceTree = "<group>"; };
 		7A1A8C3A248221F767A0538A /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +132,8 @@
 				22F303D721A56930008E9CD5 /* AppDelegate.swift */,
 				22F303D921A56930008E9CD5 /* ViewController.swift */,
 				22F303DB21A56930008E9CD5 /* Main.storyboard */,
+				3F3973D821B666AC0034D548 /* PopUpView.xib */,
+				3FDEAC5A21B63B3D004FABDB /* PopUpViewController.swift */,
 				223633A621AE3F0A000C172C /* PlaylistTableViewCell.swift */,
 				3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */,
 				745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */,
@@ -284,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F303E221A56930008E9CD5 /* LaunchScreen.storyboard in Resources */,
+				3F3973D921B666AC0034D548 /* PopUpView.xib in Resources */,
 				22F303DF21A56930008E9CD5 /* Assets.xcassets in Resources */,
 				22F303DD21A56930008E9CD5 /* Main.storyboard in Resources */,
 			);
@@ -337,16 +344,22 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/LiquidFloatingActionButton/LiquidFloatingActionButton.framework",
-				"${BUILT_PRODUCTS_DIR}/PeriscommentView/PeriscommentView.framework",
+				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LiquidFloatingActionButton.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PeriscommentView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Presentr.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -391,6 +404,7 @@
 				3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */,
 				745F07A321B3629D00164DC0 /* NearbyMessageModel.swift in Sources */,
 				223633A721AE3F0A000C172C /* PlaylistTableViewCell.swift in Sources */,
+				3FDEAC5B21B63B3D004FABDB /* PopUpViewController.swift in Sources */,
 				3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */,
 				228C6EC321A6548F008DA3A0 /* SpotifyUserModel.swift in Sources */,
 				22F303D821A56930008E9CD5 /* AppDelegate.swift in Sources */,
