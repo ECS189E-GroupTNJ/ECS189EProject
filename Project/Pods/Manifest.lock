@@ -1,4 +1,5 @@
 PODS:
+  - DynamicBlurView (3.0.1)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
   - GoogleNetworkingUtilities (1.2.2):
@@ -7,28 +8,36 @@ PODS:
   - GoogleUtilitiesLegacy (1.3.2):
     - GoogleSymbolUtilities (~> 1.1)
   - LiquidFloatingActionButton (2.0.0)
+  - MarqueeLabel/Swift (3.2.0)
   - NearbyMessages (1.1.1):
     - GoogleInterchangeUtilities (~> 1.2)
     - GoogleNetworkingUtilities (~> 1.2)
     - GoogleSymbolUtilities (~> 1.1)
     - GoogleUtilitiesLegacy (~> 1.3)
-  - PeriscommentView (0.0.1)
+  - PopupDialog (0.9.1):
+    - DynamicBlurView (~> 3.0.1)
+  - Presentr (1.9)
   - SnapKit (4.2.0)
 
 DEPENDENCIES:
   - LiquidFloatingActionButton (from `https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git`)
+  - MarqueeLabel/Swift
   - NearbyMessages
-  - PeriscommentView
+  - PopupDialog (~> 0.9)
+  - Presentr
   - SnapKit (~> 4.2.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - DynamicBlurView
     - GoogleInterchangeUtilities
     - GoogleNetworkingUtilities
     - GoogleSymbolUtilities
     - GoogleUtilitiesLegacy
+    - MarqueeLabel
     - NearbyMessages
-    - PeriscommentView
+    - PopupDialog
+    - Presentr
     - SnapKit
 
 EXTERNAL SOURCES:
@@ -41,15 +50,18 @@ CHECKOUT OPTIONS:
     :git: https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git
 
 SPEC CHECKSUMS:
+  DynamicBlurView: b1df5415f9bd31897549e5d7077e5ec120a4d636
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleNetworkingUtilities: 3edd3a8161347494f2da60ea0deddc8a472d94cb
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleUtilitiesLegacy: 5501bedec1646bd284286eb5fc9453f7e23a12f4
   LiquidFloatingActionButton: 61496c787627103ccb3a23d4dea71faef4a84d4d
+  MarqueeLabel: 440a502b91a9179bd98f9fff00ba1150650a1c0e
   NearbyMessages: bd9e88f2df7fbab78be58fed58580d5d5bd62cbf
-  PeriscommentView: b4e91cdb18bfc0aa4ec3eaac322d93102ea3facb
+  PopupDialog: 03985b669c29802661c187513bf827340db1ae4d
+  Presentr: 7078d7eb5d1661ebeaae60c9e42a1e534de1b993
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
-PODFILE CHECKSUM: f4b1addbf736190acafc46e0500532b46f2fee83
+PODFILE CHECKSUM: 7a059759aaa63047fb54a5050b2d15092fad2d77
 
 COCOAPODS: 1.5.3

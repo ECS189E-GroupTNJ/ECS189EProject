@@ -143,13 +143,19 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LiquidFloatingActionButton/LiquidFloatingActionButton.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PeriscommentView/PeriscommentView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/LiquidFloatingActionButton/LiquidFloatingActionButton.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/PeriscommentView/PeriscommentView.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/Presentr/Presentr.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

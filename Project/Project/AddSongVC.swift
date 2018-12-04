@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import LiquidFloatingActionButton
 import UserNotifications
+import PopupDialog
 
 public class CustomCell : LiquidFloatingCell {
     var name: String = "sample"
@@ -80,9 +81,12 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
 
     @IBOutlet weak var captureButton: UIButton!
     
+    
+    
     var userModel = SpotifyUserModel(forTheFirstTime: true)
     var messageModel = NearbyMessageModel()
     var addedTrackID: String?
+    var senderDisplayName: String?
     var addedTrackInfo: SpotifyUserModel.TrackInfo?
     
     var settingsButton: LiquidFloatingActionButton!
@@ -125,6 +129,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         settingCells.append(CustomCell(icon: UIImage(named: "peer")!, name: "receive notification"))
         settingCells.append(CustomCell(icon: UIImage(named: "peer")!, name: "send notification"))
         
+        settingCells[0].imageView.tintColor = UIColor.white
         settingCells[1].imageView.tintColor = Storage.useSmartSelection ? UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0) : UIColor.white
         settingCells[2].imageView.tintColor = Storage.receiveNotification ? UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0) : UIColor.white
         settingCells[3].imageView.tintColor = Storage.sendNotification ? UIColor(red: 147 / 255, green: 235 / 255, blue: 101 / 255, alpha: 1.0) : UIColor.white
@@ -154,6 +159,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
                 messageModel.toggleReceiveNotification { (message) in
                     self.handleMessageNotification(message: message)
                 }
+                self.showPopup()
             }
             else {
                 settingCells[2].imageView.tintColor = UIColor.white
@@ -239,11 +245,35 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         completionHandler([])
     }
     
+    func showPopup() {
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "popUpViewController") as! PopUpViewController
+        print("Test: ", self.addedTrackInfo?.trackName)
+        viewController.trackInfo = self.addedTrackInfo
+        viewController.senderName = self.senderDisplayName ?? ""
+        let popup = PopupDialog(viewController: viewController, buttonAlignment: .vertical, transitionStyle: .bounceUp, preferredWidth: 320, tapGestureDismissal: true, panGestureDismissal: true, hideStatusBar: false)
+        
+        let confirm = DefaultButton(title: "Confirm", dismissOnTap: true) {
+            if let track = self.addedTrackID {
+                self.userModel.addTrackToPlaylist(track: track)
+            }
+            else {
+                print("Track not identified")
+            }
+        }
+        
+        let cancel = CancelButton(title: "Cancel") {}
+        
+        popup.addButtons([confirm, cancel])
+        
+        self.present(popup, animated: true)
+    }
     
+
     
     
     @IBAction func capturePressed() {
         userModel.addCurrentTrackToPlaylist()
+        addedTrackInfo = userModel.getCurrentTrackInfo()
         // send notification
     }
     

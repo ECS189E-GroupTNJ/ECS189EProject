@@ -283,18 +283,20 @@ class SpotifyUserModel {
             print("Track not identified")
             return TrackInfo(albumImage: nil, artistName: "", trackName: "")
         }
-        
+        print("DO I NOT REACH HERE")
         let id = String(track.suffix(from: track.index(track.startIndex, offsetBy: 14)))
         
         return getTrackInfo(track: id)
     }
     
     func getTrackInfo(track: String) -> TrackInfo {
-        let getTrackURL = "https://api.spotify/v1/tracks/\(track)"
+        let getTrackURL = "https://api.spotify.com/v1/tracks/\(track)"
+        print(getTrackURL)
         let trackTitle = (UIApplication.shared.delegate as! AppDelegate).currentTrack?.name ?? ""
         var artistNames = ""
         var cover: CIImage? = nil
-        
+        let getImageBarrier = DispatchGroup()
+        getImageBarrier.enter()
         SpotifyAPI(endpoint: getTrackURL, param: nil) { (response) in
             guard let realResponse = response else {
                 print("Track not found")
@@ -311,23 +313,26 @@ class SpotifyUserModel {
                 return
             }
             
-            let getImageBarrier = DispatchGroup()
+           
             
+
             if albumImages.count > 0 {
                 guard let imageURL = albumImages[0]["url"] as? String else {
                     print("Unexpected error from album image")
                     return
                 }
+                print(imageURL)
                 
-                getImageBarrier.enter()
                 self.imageGET(at: imageURL) { (data) in
                     if let image = data {
                         cover = image
+                        print("wtf")
                     }
                     getImageBarrier.leave()
                 }
             }
             var names: [String] = []
+            
             
             for artist in artists {
                 guard let name = artist["name"] as? String else {
@@ -338,13 +343,12 @@ class SpotifyUserModel {
             }
             
             artistNames = names.joined(separator: ", ")
-            
-            if artistNames.count > 0 {
-                artistNames.remove(at: artistNames.startIndex)
-            }
-            getImageBarrier.wait()
+            print("AHHHHH \(artistNames)")
+            print("????? \(artistNames)")
         }
         
+        getImageBarrier.wait()
+        print(artistNames, trackTitle, "ASDASDAS")
         return TrackInfo(albumImage: cover, artistName: artistNames, trackName: trackTitle)
     }
     

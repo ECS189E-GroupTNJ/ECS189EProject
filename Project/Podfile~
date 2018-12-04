@@ -1,0 +1,17 @@
+# Uncomment the next line to define a global platform for your project
+# source 'https://github.com/yoavlt/LiquidFloatingActionButton.git'
+source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '12.0'
+
+  target 'Project' do
+    use_frameworks!
+    # Add Button
+    pod 'LiquidFloatingActionButton', :git => 'https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git'
+    # Send notification to people in the car
+    pod 'SnapKit', '~> 4.2.0'
+    pod 'NearbyMessages'
+    pod 'Presentr'
+    pod 'MarqueeLabel/Swift'
+end
+
