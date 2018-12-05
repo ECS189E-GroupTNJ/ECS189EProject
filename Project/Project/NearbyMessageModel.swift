@@ -29,6 +29,18 @@ class NearbyMessageModel{
     
     var messages = [String]()
     
+    init() {
+        
+    }
+    
+    init(viewController: AddSongVC) {
+        if Storage.receiveNotification {
+            startSubscribing { (message) in
+                viewController.handleMessageNotification(message: message)
+            }
+        }
+    }
+    
     func bluetoothAvailable(_ central: CBCentralManager) -> Bool {
         if central.state == .poweredOff{
             print("Bluetooth switched off or not initialized")
@@ -54,7 +66,7 @@ class NearbyMessageModel{
         let text = "\(Storage.displayName)\n\(trackID)"
         if let messageManager = self.messageManager{
             GNSMessageManager.setDebugLoggingEnabled(true)
-            let message: GNSMessage = GNSMessage(content: text.data(using: .utf8, allowLossyConversion: true))
+            let message: GNSMessage = GNSMessage(content: text.data(using: .utf8, allowLossyConversion: false))
             publication = messageManager.publication(with: message,
                 paramsBlock: { (params: GNSPublicationParams?) in
                     guard let params = params else { return }
@@ -63,12 +75,15 @@ class NearbyMessageModel{
                         params.discoveryMediums = .BLE
                 })
             })
+            print("Display name was: \(Storage.displayName)")
+            print("Shared message: \(text)")
             DispatchQueue.global(qos: .userInitiated).async {
                 sleep(10)
                 self.publication = nil
             }
         }
     }
+    
     
     func toggleSendNotification() {
         Storage.sendNotification = !Storage.sendNotification
@@ -77,33 +92,40 @@ class NearbyMessageModel{
     func toggleReceiveNotification(callback: @escaping (_ message: GNSMessage) -> Void) {
         Storage.receiveNotification = !Storage.receiveNotification
         if Storage.receiveNotification {
-            if let messageManager = self.messageManager{
-                subscription =
-                    messageManager.subscription(messageFoundHandler: { (message: GNSMessage?) in
-                        guard let realMessage = message else {
-                            print("Message not received?")
-                            return
-                        }
-                        DispatchQueue.main.async { callback(realMessage) }
-                    },
-                    messageLostHandler: { (message: GNSMessage?) in
-                        print("Message no longer received")
-                        
-                    },
-                    paramsBlock:{ (params: GNSSubscriptionParams?) in
-                        guard let params = params else { return }
-                        params.strategy = GNSStrategy(paramsBlock: { (params: GNSStrategyParams?) in
-                            guard let params = params else { return }
-                            params.allowInBackground = true
-                            params.discoveryMediums = .BLE
-                    })
-                })
-            }
+            startSubscribing(callback: callback)
         }
         else {
             subscription = nil
         }
     }
+    
+    func startSubscribing(callback: @escaping (_ message: GNSMessage) -> Void) {
+        
+        if let messageManager = self.messageManager{
+            subscription =
+                messageManager.subscription(messageFoundHandler: { (message: GNSMessage?) in
+                    guard let realMessage = message else {
+                        print("Message not received?")
+                        return
+                    }
+                    print("Reciving message:", String(data: realMessage.content, encoding: .utf8))
+                    DispatchQueue.main.async { callback(realMessage) }
+                },
+                    messageLostHandler: { (message: GNSMessage?) in
+                    print("Message no longer received")
+                                                
+                },
+                    paramsBlock:{ (params: GNSSubscriptionParams?) in
+                        guard let params = params else { return }
+                        params.strategy = GNSStrategy(paramsBlock: { (params: GNSStrategyParams?) in
+                        guard let params = params else { return }
+                        params.allowInBackground = true
+                        params.discoveryMediums = .BLE
+                    })
+                })
+        }
+    }
+    
     
 //    func grantPermission(){
 //        GNSPermission.setGranted(!GNSPermission.isGranted())

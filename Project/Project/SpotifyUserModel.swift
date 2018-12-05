@@ -37,7 +37,7 @@ class Storage {
         }
         
         set(displayName) {
-            UserDefaults.standard.set(currentPlaylistID, forKey: "displayName")
+            UserDefaults.standard.set(displayName, forKey: "displayName")
             print("Display name was saved as \(UserDefaults.standard.synchronize())")
         }
     }
@@ -293,13 +293,13 @@ class SpotifyUserModel {
     func getTrackInfo(track: String) -> TrackInfo {
         let getTrackURL = "https://api.spotify.com/v1/tracks/\(track)"
         print(getTrackURL)
-        let trackTitle = (UIApplication.shared.delegate as! AppDelegate).currentTrack?.name ?? ""
+        var trackTitle = ""
         var artistNames = ""
         var cover: CIImage? = nil
         let getImageBarrier = DispatchGroup()
         getImageBarrier.enter()
         SpotifyAPI(endpoint: getTrackURL, param: nil) { (response) in
-            guard let realResponse = response else {
+            guard let realResponse = response, let title = realResponse["name"] as? String else {
                 print("Track not found")
                 return
             }
@@ -329,6 +329,7 @@ class SpotifyUserModel {
                     getImageBarrier.leave()
                 }
             }
+            trackTitle = title
             var names: [String] = []
             
             
@@ -397,12 +398,14 @@ class SpotifyUserModel {
                     }
                     else {
                         print("Added to the default playlist")
-                        self.currentTrackID = track
+                        self.currentTrackID = String(track.suffix(from: track.index(track.startIndex, offsetBy: 14)))
                         DispatchQueue.main.async{ callback() }
                     }
                 }
             }
             else {
+                print("Addition successful")
+                self.currentTrackID = String(track.suffix(from: track.index(track.startIndex, offsetBy: 14)))
                 DispatchQueue.main.async{ callback() }
             }
         }
