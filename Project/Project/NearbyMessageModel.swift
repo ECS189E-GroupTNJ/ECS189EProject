@@ -63,6 +63,10 @@ class NearbyMessageModel{
                         params.discoveryMediums = .BLE
                 })
             })
+            DispatchQueue.global(qos: .userInitiated).async {
+                sleep(10)
+                self.publication = nil
+            }
         }
     }
     
@@ -95,6 +99,9 @@ class NearbyMessageModel{
                     })
                 })
             }
+        }
+        else {
+            subscription = nil
         }
     }
     

@@ -233,7 +233,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         }
         
         if response.actionIdentifier == "add" {
-            userModel.addTrackToPlaylist(track: trackID)
+            userModel.addTrackToPlaylist(track: trackID) {}
         }
         completionHandler()
     }
@@ -254,7 +254,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         
         let confirm = DefaultButton(title: "Confirm", dismissOnTap: true) {
             if let track = self.addedTrackID {
-                self.userModel.addTrackToPlaylist(track: track)
+                self.userModel.addTrackToPlaylist(track: track) {}
             }
             else {
                 print("Track not identified")
@@ -272,8 +272,13 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     
     
     @IBAction func capturePressed() {
-        userModel.addCurrentTrackToPlaylist()
-        addedTrackInfo = userModel.getCurrentTrackInfo()
+        userModel.addCurrentTrackToPlaylist {
+            if let trackID = self.userModel.currentTrackID {
+                self.messageModel.shareMessage(with: "\(Storage.displayName)\n\(trackID)")
+            }
+        }
+        
+        
         // send notification
     }
     
