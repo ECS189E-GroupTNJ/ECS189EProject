@@ -99,6 +99,7 @@ class SpotifyUserModel {
     let statsCollectionBarrier = DispatchGroup()
     var currentPlaylistIndex: Int?
     let defaultPlaylistName = "default"
+    var currentTrackID: String?
     
     func configuration() -> URLSessionConfiguration {
         let config = URLSessionConfiguration.ephemeral
@@ -312,9 +313,6 @@ class SpotifyUserModel {
                 print("Artists not found")
                 return
             }
-            
-           
-            
 
             if albumImages.count > 0 {
                 guard let imageURL = albumImages[0]["url"] as? String else {
@@ -352,7 +350,7 @@ class SpotifyUserModel {
         return TrackInfo(albumImage: cover, artistName: artistNames, trackName: trackTitle)
     }
     
-    func addCurrentTrackToPlaylist() {
+    func addCurrentTrackToPlaylist(callback: @escaping () -> Void) {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         
         // need current track information (requires Spotify authorization in advance)
@@ -361,11 +359,11 @@ class SpotifyUserModel {
             return
         }
         
-        addTrackToPlaylist(track: track)
+        addTrackToPlaylist(track: track, callback: callback)
     }
     
     
-    func addTrackToPlaylist(track: String) {
+    func addTrackToPlaylist(track: String, callback: @escaping () -> Void) {
         if Storage.useSmartSelection {
             setSmartChoiceForCurrentTrack()
         }
@@ -399,8 +397,13 @@ class SpotifyUserModel {
                     }
                     else {
                         print("Added to the default playlist")
+                        self.currentTrackID = track
+                        DispatchQueue.main.async{ callback() }
                     }
                 }
+            }
+            else {
+                DispatchQueue.main.async{ callback() }
             }
         }
     }

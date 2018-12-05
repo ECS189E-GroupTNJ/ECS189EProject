@@ -118,6 +118,7 @@
                 <constraint firstItem="mgk-ya-NHs" firstAttribute="top" secondItem="oke-HP-kiL" secondAttribute="bottom" constant="23" id="cfw-DZ-blh"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mgk-ya-NHs" secondAttribute="bottom" constant="86" id="xFc-Pf-mk9"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
     </objects>
