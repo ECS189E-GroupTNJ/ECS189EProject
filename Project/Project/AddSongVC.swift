@@ -88,6 +88,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     var addedTrackID: String?
     var senderDisplayName: String?
     var addedTrackInfo: SpotifyUserModel.TrackInfo?
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
     var settingsButton: LiquidFloatingActionButton!
     var settingCells: [LiquidFloatingCell] = []
@@ -97,6 +98,9 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        messageModel = NearbyMessageModel(viewController: self)
+        
         captureButton.layer.cornerRadius = captureButton.frame.height / 2
         captureButton.setTitleColor(UIColor.white, for: .normal)
         captureButton.layer.shadowColor = UIColor.red.cgColor
@@ -159,7 +163,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
                 messageModel.toggleReceiveNotification { (message) in
                     self.handleMessageNotification(message: message)
                 }
-                self.showPopup()
+                //self.showPopup()
             }
             else {
                 settingCells[2].imageView.tintColor = UIColor.white
@@ -179,24 +183,27 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     }
     
     func handleMessageNotification(message: GNSMessage) {
+        print("Message Received")
+        
+        guard let text = String(data: message.content, encoding: .utf8) else {
+            print("Could not receive message")
+            return
+        }
+        
+        let sender = String(text.split(separator: "\n")[0])
+        let trackID = String(text.split(separator: "\n")[1])
+        
+        let trackInfo = userModel.getTrackInfo(track: trackID)
+        senderDisplayName = sender
+        addedTrackID = trackID
+        addedTrackInfo = trackInfo
+        
         if UIApplication.shared.applicationState != .active {
-            
-            guard let text = String(data: message.content, encoding: .utf8) else {
-                print("Could not receive message")
-                return
-            }
-            
-            let sender = String(text.split(separator: "\n")[0])
-            let trackID = String(text.split(separator: "\n")[1])
-            
-            let trackInfo = userModel.getTrackInfo(track: trackID)
-            addedTrackID = trackID
-            addedTrackInfo = trackInfo
             
             let content = UNMutableNotificationContent()
             content.title = "DriverSpotify"
             content.subtitle = "\(sender) added a song:"
-            content.body = "\(trackInfo.trackName)\n\(trackInfo.artistName)"
+            content.body = "\(trackInfo.trackName) by \(trackInfo.artistName)"
             content.categoryIdentifier = "com.ecs189e.driverspotify.notification.category"
             var albumImage: UIImage
             
@@ -209,6 +216,10 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
             
             if let attachment = UNNotificationAttachment.create(identifier: ProcessInfo.processInfo.globallyUniqueString, image: albumImage, options: nil) {
                 content.attachments = [attachment]
+                print("Succesfully attached")
+            }
+            else {
+                print("Attachment failed")
             }
             
             let action = UNNotificationAction(identifier: "add", title: "Add", options: [.foreground])
@@ -223,6 +234,8 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         }
         else {
             // popup for query
+            
+            showPopup()
         }
     }
     
@@ -232,9 +245,10 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
             return
         }
         
-        if response.actionIdentifier == "add" {
-            userModel.addTrackToPlaylist(track: trackID) {}
-        }
+        print("Now handle action")
+   
+        self.userModel.addTrackToPlaylist(track: "spotify:track:\(trackID)") {}
+        
         completionHandler()
     }
     
@@ -254,7 +268,8 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         
         let confirm = DefaultButton(title: "Confirm", dismissOnTap: true) {
             if let track = self.addedTrackID {
-                self.userModel.addTrackToPlaylist(track: track) {}
+                print("Adding: \(track)")
+                self.userModel.addTrackToPlaylist(track: "spotify:track:\(track)") {}
             }
             else {
                 print("Track not identified")
@@ -272,11 +287,13 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     
     
     @IBAction func capturePressed() {
-        userModel.addCurrentTrackToPlaylist {
-            if let trackID = self.userModel.currentTrackID {
-                self.messageModel.shareMessage(with: "\(Storage.displayName)\n\(trackID)")
+        userModel.addCurrentTrackToPlaylist() {
+            if let trackID = self.userModel.currentTrackID, Storage.sendNotification {
+                print("Track addition successful: attempting sharing")
+                self.messageModel.shareMessage(with: trackID)
             }
         }
+        //addedTrackInfo = userModel.getCurrentTrackInfo()
         
         
         // send notification
@@ -299,6 +316,7 @@ extension UNNotificationAttachment {
                 return nil
             }
             try imageData.write(to: fileURL)
+            print("Image wriessful")
             let imageAttachment = try UNNotificationAttachment.init(identifier: imageFileIdentifier, url: fileURL, options: options)
             return imageAttachment
         } catch {

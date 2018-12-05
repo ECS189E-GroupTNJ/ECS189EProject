@@ -58,6 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, SPTSessionManagerDelegate
                 return
             }
             Storage.userID = id
+            print("DISPLAY NAME IS: \(displayName)")
             Storage.displayName = displayName
         }
         print("HERE")

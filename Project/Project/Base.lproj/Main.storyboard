@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Kb9-gH-QTS" kind="relationship" relationship="rootViewController" id="2hl-nY-VeH"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NQb-ZJ-oHm"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eiR-Hs-Cie" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,7 +349,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NQP-NC-77P">
-                                                    <rect key="frame" x="235" y="7.3333333333333357" width="65" height="65"/>
+                                                    <rect key="frame" x="329" y="7.3333333333333357" width="65" height="65"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="65" id="ciq-ku-S4B"/>
                                                         <constraint firstAttribute="height" constant="65" id="otv-6G-RZy"/>
@@ -375,7 +375,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThisIsALongName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2is-y7-fnq">
-                                                    <rect key="frame" x="54" y="28" width="161" height="24"/>
+                                                    <rect key="frame" x="54" y="28" width="255" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
