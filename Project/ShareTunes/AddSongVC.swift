@@ -11,6 +11,7 @@ import SnapKit
 import LiquidFloatingActionButton
 import UserNotifications
 import PopupDialog
+import CoreBluetooth
 
 public class CustomCell : LiquidFloatingCell {
     var name: String = "sample"
@@ -40,7 +41,12 @@ public class CustomCell : LiquidFloatingCell {
 }
 
 
-class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource, UNUserNotificationCenterDelegate {
+class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFloatingActionButtonDataSource, UNUserNotificationCenterDelegate, CBCentralManagerDelegate {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        messageModel.bluetoothOn = central.state == .poweredOn ? true : false
+        print("Bluetooth changed to: \(messageModel.bluetoothOn)")
+    }
+    
     func numberOfCells(_ liquidFloatingActionButton: LiquidFloatingActionButton) -> Int {
         return settingCells.count
     }
@@ -88,6 +94,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     var addedTrackID: String?
     var senderDisplayName: String?
     var addedTrackInfo: SpotifyUserModel.TrackInfo?
+    var bluetoothManager: CBCentralManager!
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     var settingsButton: LiquidFloatingActionButton!
@@ -100,6 +107,8 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         super.viewDidLoad()
         
         messageModel = NearbyMessageModel(viewController: self)
+        bluetoothManager = CBCentralManager()
+        bluetoothManager.delegate = self
         
         captureButton.layer.cornerRadius = captureButton.frame.height / 2
         captureButton.setTitleColor(UIColor.white, for: .normal)
@@ -178,6 +187,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
                 settingCells[3].imageView.tintColor = UIColor.white
                 messageModel.toggleSendNotification()
             }
+            //sendEmptyBackgroundNotification()
         default: ()
         }
     }
@@ -201,7 +211,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         if UIApplication.shared.applicationState != .active {
             
             let content = UNMutableNotificationContent()
-            content.title = "DriverSpotify"
+            content.title = "ShareTunes"
             content.subtitle = "\(sender) added a song:"
             content.body = "\(trackInfo.trackName) by \(trackInfo.artistName)"
             content.categoryIdentifier = "com.ecs189e.driverspotify.notification.category"
@@ -247,9 +257,26 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         
         print("Now handle action")
    
-        self.userModel.addTrackToPlaylist(track: "spotify:track:\(trackID)") {}
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.0) {
+            self.sendUntilConnected(attempt: 1, trackID: trackID)
+        }
+        
         
         completionHandler()
+    }
+    
+    func sendUntilConnected(attempt: Int, trackID: String) {
+        if attempt > 10 {
+            self.popupWithMessage(title: "Track Could Not Be Added", body: "ShareTunes could not connect to the Spotify App")
+        }
+        else if self.delegate.appRemote.isConnected {
+            self.userModel.addTrackToPlaylist(track: "spotify:track:\(trackID)") {}
+        }
+        else {
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 1.0) {
+                self.sendUntilConnected(attempt: attempt + 1, trackID: trackID)
+            }
+        }
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -301,16 +328,18 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         let confirm = DefaultButton(title: "Confirm") {
             if Storage.sendNotification {
                 self.settingCells[3].imageView.tintColor = UIColor.white
-                self.messageModel.toggleSendNotification()
+                Storage.sendNotification = false
             }
             if Storage.receiveNotification {
                 self.settingCells[2].imageView.tintColor = UIColor.white
-                self.messageModel.toggleReceiveNotification{(message) in }
+                Storage.receiveNotification = false
             }
         }
         confirm.backgroundColor = UIColor.groupTableViewBackground
         
         popup.addButton(confirm)
+        
+        self.present(popup, animated: true)
     }
     
     
@@ -325,6 +354,46 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         
         
         // send notification
+    }
+    
+    func sendEmptyBackgroundNotification() {
+        let sender = "Nobody"
+        let trackInfo = SpotifyUserModel.TrackInfo(albumImage: nil, artistName: "Me", trackName: "Tunes")
+        addedTrackID = "2uaiyLKnYvazyfR0Ky3Kbk"
+        
+        let content = UNMutableNotificationContent()
+        content.title = "ShareTunes"
+        content.subtitle = "\(sender) added a song:"
+        content.body = "\(trackInfo.trackName) by \(trackInfo.artistName)"
+        content.categoryIdentifier = "com.ecs189e.driverspotify.notification.category"
+        var albumImage: UIImage
+        
+        if let image = trackInfo.albumImage {
+            albumImage = UIImage(ciImage: image)
+        }
+        else {
+            albumImage = UIImage(named: "defaultCover")!
+        }
+        
+        if let attachment = UNNotificationAttachment.create(identifier: ProcessInfo.processInfo.globallyUniqueString, image: albumImage, options: nil) {
+            content.attachments = [attachment]
+            print("Succesfully attached")
+        }
+        else {
+            print("Attachment failed")
+        }
+        
+        let action = UNNotificationAction(identifier: "add", title: "Add", options: [.foreground])
+        let category = UNNotificationCategory(identifier: "com.ecs189e.driverspotify.notification.category", actions: [action], intentIdentifiers: [], options: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([category])
+        let request = UNNotificationRequest(identifier: "addSongRequest", content: content, trigger: UNTimeIntervalNotificationTrigger(timeInterval: 5.0, repeats: false))
+        
+        
+        UNUserNotificationCenter.current().add(request) { (error) in
+            print("\(error?.localizedDescription ?? "")")
+        }
+
     }
     
 

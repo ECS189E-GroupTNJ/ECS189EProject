@@ -26,6 +26,7 @@ class NearbyMessageModel{
     })
     var publication: GNSPublication?
     var subscription: GNSSubscription?
+    var bluetoothOn = true
     
     var messages = [String]()
     
@@ -88,8 +89,10 @@ class NearbyMessageModel{
             })
             print("Display name was: \(Storage.displayName)")
             print("Shared message: \(text)")
-            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 10.0) {
-                self.publication = nil
+            if bluetoothOn {
+                DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 10.0) {
+                    self.publication = nil
+                }
             }
         }
     }
