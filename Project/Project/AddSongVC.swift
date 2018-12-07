@@ -264,7 +264,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         print("Test: ", self.addedTrackInfo?.trackName)
         viewController.trackInfo = self.addedTrackInfo
         viewController.senderName = self.senderDisplayName ?? ""
-        let popup = PopupDialog(viewController: viewController, buttonAlignment: .vertical, transitionStyle: .bounceUp, preferredWidth: 320, tapGestureDismissal: true, panGestureDismissal: true, hideStatusBar: false)
+        let popup = PopupDialog(viewController: viewController, buttonAlignment: .horizontal, transitionStyle: .bounceUp, preferredWidth: 320, tapGestureDismissal: true, panGestureDismissal: true, hideStatusBar: false)
         
         let confirm = DefaultButton(title: "Confirm", dismissOnTap: true) {
             if let track = self.addedTrackID {
@@ -275,15 +275,43 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
                 print("Track not identified")
             }
         }
+        confirm.backgroundColor = UIColor.groupTableViewBackground
         
         let cancel = CancelButton(title: "Cancel") {}
+        
+        cancel.backgroundColor = UIColor.groupTableViewBackground
         
         popup.addButtons([confirm, cancel])
         
         self.present(popup, animated: true)
     }
     
-
+    func bluetoothDisabled() {
+        popupWithMessage(title: "Bluetooth Disabled", body: "You need to turn on bluetooth to be able to use track notification feature.")
+    }
+    
+    func bluetoothDenied() {
+        popupWithMessage(title: "Bluetooth Permission Denied", body: "You need to give the app permission to use bluetooth to be able to use track notification feature.")
+    }
+    
+    func popupWithMessage(title: String, body: String) {
+        let popup = PopupDialog(title: title, message: body)
+        popup.view.backgroundColor = UIColor.groupTableViewBackground
+        
+        let confirm = DefaultButton(title: "Confirm") {
+            if Storage.sendNotification {
+                self.settingCells[3].imageView.tintColor = UIColor.white
+                self.messageModel.toggleSendNotification()
+            }
+            if Storage.receiveNotification {
+                self.settingCells[2].imageView.tintColor = UIColor.white
+                self.messageModel.toggleReceiveNotification{(message) in }
+            }
+        }
+        confirm.backgroundColor = UIColor.groupTableViewBackground
+        
+        popup.addButton(confirm)
+    }
     
     
     @IBAction func capturePressed() {

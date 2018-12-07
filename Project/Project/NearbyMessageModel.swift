@@ -39,6 +39,17 @@ class NearbyMessageModel{
                 viewController.handleMessageNotification(message: message)
             }
         }
+        messageManager = GNSMessageManager(apiKey: "AIzaSyCcgDrcE6R4Hka4F1INzKEQBnyhBmfRo5Y", paramsBlock: { (params: GNSMessageManagerParams?) in
+            guard let params = params else { print("Message manager error"); return }
+            params.bluetoothPowerErrorHandler = { (hasError: Bool) in
+                viewController.bluetoothDisabled()
+                print("Bluetooth not turned on")
+            }
+            params.bluetoothPermissionErrorHandler = { (hasError: Bool) in
+                viewController.bluetoothDenied()
+                print("Bluetooth permission not granted")
+            }
+        })
     }
     
     func bluetoothAvailable(_ central: CBCentralManager) -> Bool {
@@ -77,8 +88,7 @@ class NearbyMessageModel{
             })
             print("Display name was: \(Storage.displayName)")
             print("Shared message: \(text)")
-            DispatchQueue.global(qos: .userInitiated).async {
-                sleep(10)
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 10.0) {
                 self.publication = nil
             }
         }
