@@ -101,7 +101,15 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
     var settingCells: [LiquidFloatingCell] = []
     
     
-    @IBOutlet var roundButtons: [RoundButton]!
+    @IBOutlet var roundButtons: [UIButton]!
+    
+    override func viewDidLayoutSubviews() {
+        for roundButton in roundButtons {
+            roundButton.clipsToBounds = true
+            roundButton.layer.cornerRadius = roundButton.bounds.size.width / 2
+            print(roundButton.layer.cornerRadius, roundButton.frame.height)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,10 +129,7 @@ class AddSongVC: UIViewController, LiquidFloatingActionButtonDelegate, LiquidFlo
         
         UNUserNotificationCenter.current().delegate = self
         
-        for roundButton in roundButtons {
-            roundButton.cornerRadius = roundButton.frame.height / 2
-            print(roundButton.cornerRadius, roundButton.frame.height)
-        }
+        
         
         let createButton: (CGRect, LiquidFloatingActionButtonAnimateStyle) -> LiquidFloatingActionButton = { (frame, style) in
             let floatingActionButton = CustomDrawingActionButton(frame: frame)
