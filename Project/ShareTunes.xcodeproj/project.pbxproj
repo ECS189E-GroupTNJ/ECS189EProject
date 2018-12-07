@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		194B06DC2500D0046055F313 /* Pods_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A1A8C3A248221F767A0538A /* Pods_Project.framework */; };
 		223633A521AE3C0D000C172C /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223633A421AE3C0D000C172C /* RadioButton.swift */; };
 		223633A721AE3F0A000C172C /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223633A621AE3F0A000C172C /* PlaylistTableViewCell.swift */; };
 		228C6EC321A6548F008DA3A0 /* SpotifyUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C6EC221A6548F008DA3A0 /* SpotifyUserModel.swift */; };
@@ -19,12 +18,12 @@
 		22F303ED21A56930008E9CD5 /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F303EC21A56930008E9CD5 /* ProjectTests.swift */; };
 		22F303F821A56930008E9CD5 /* ProjectUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F303F721A56930008E9CD5 /* ProjectUITests.swift */; };
 		22F3040721A56A19008E9CD5 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */; };
-		3F3973D921B666AC0034D548 /* PopUpView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3973D821B666AC0034D548 /* PopUpView.xib */; };
 		3FA64AC121ACC6BE0095D177 /* AddSongVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */; };
 		3FA64AC321ACC7540095D177 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC221ACC7540095D177 /* RoundButton.swift */; };
 		3FA64AC521ACCE3A0095D177 /* PlaylistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */; };
 		3FDEAC5B21B63B3D004FABDB /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDEAC5A21B63B3D004FABDB /* PopUpViewController.swift */; };
 		745F07A321B3629D00164DC0 /* NearbyMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */; };
+		A8FD2C0E156E32AB02130BB4 /* Pods_ShareTunes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC70533EF83077831A484D3D /* Pods_ShareTunes.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,23 +47,23 @@
 		223633A421AE3C0D000C172C /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		223633A621AE3F0A000C172C /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		228C6EC221A6548F008DA3A0 /* SpotifyUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotifyUserModel.swift; sourceTree = "<group>"; };
-		22F303D421A56930008E9CD5 /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F303D421A56930008E9CD5 /* ShareTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareTunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F303D721A56930008E9CD5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F303D921A56930008E9CD5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		22F303DC21A56930008E9CD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22F303DE21A56930008E9CD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22F303E121A56930008E9CD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22F303E321A56930008E9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F303E821A56930008E9CD5 /* ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F303E821A56930008E9CD5 /* ShareTunesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareTunesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F303EC21A56930008E9CD5 /* ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		22F303EE21A56930008E9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F303F321A56930008E9CD5 /* ProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		22F303F321A56930008E9CD5 /* ShareTunesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareTunesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F303F721A56930008E9CD5 /* ProjectUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectUITests.swift; sourceTree = "<group>"; };
 		22F303F921A56930008E9CD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22F3040521A569AE008E9CD5 /* Project-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Project-Bridging-Header.h"; sourceTree = "<group>"; };
+		22F3040521A569AE008E9CD5 /* ShareTunes-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ShareTunes-Bridging-Header.h"; sourceTree = "<group>"; };
 		22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		3125A23FA772D644C4B13A1C /* Pods-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.debug.xcconfig"; sourceTree = "<group>"; };
-		3F3973D821B666AC0034D548 /* PopUpView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpView.xib; sourceTree = "<group>"; };
+		3BF57FADFE56285918204FC3 /* Pods-ShareTunes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareTunes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShareTunes/Pods-ShareTunes.debug.xcconfig"; sourceTree = "<group>"; };
 		3FA64AC021ACC6BE0095D177 /* AddSongVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSongVC.swift; sourceTree = "<group>"; };
 		3FA64AC221ACC7540095D177 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistVC.swift; sourceTree = "<group>"; };
@@ -72,6 +71,8 @@
 		5DE925818B6CBF21B769BEE8 /* Pods-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Project/Pods-Project.release.xcconfig"; sourceTree = "<group>"; };
 		745F07A221B3629C00164DC0 /* NearbyMessageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NearbyMessageModel.swift; sourceTree = "<group>"; };
 		7A1A8C3A248221F767A0538A /* Pods_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BAC5C6363012725158FA1FD2 /* Pods-ShareTunes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareTunes.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShareTunes/Pods-ShareTunes.release.xcconfig"; sourceTree = "<group>"; };
+		FC70533EF83077831A484D3D /* Pods_ShareTunes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareTunes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F3040721A56A19008E9CD5 /* SpotifyiOS.framework in Frameworks */,
-				194B06DC2500D0046055F313 /* Pods_Project.framework in Frameworks */,
+				A8FD2C0E156E32AB02130BB4 /* Pods_ShareTunes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,10 +105,10 @@
 		22F303CB21A56930008E9CD5 = {
 			isa = PBXGroup;
 			children = (
-				22F3040521A569AE008E9CD5 /* Project-Bridging-Header.h */,
-				22F303D621A56930008E9CD5 /* Project */,
-				22F303EB21A56930008E9CD5 /* ProjectTests */,
-				22F303F621A56930008E9CD5 /* ProjectUITests */,
+				22F3040521A569AE008E9CD5 /* ShareTunes-Bridging-Header.h */,
+				22F303D621A56930008E9CD5 /* ShareTunes */,
+				22F303EB21A56930008E9CD5 /* ShareTunesTests */,
+				22F303F621A56930008E9CD5 /* ShareTunesUITests */,
 				22F303D521A56930008E9CD5 /* Products */,
 				22F3040621A56A19008E9CD5 /* SpotifyiOS.framework */,
 				64356245FBBF6315CE614B84 /* Frameworks */,
@@ -118,21 +119,20 @@
 		22F303D521A56930008E9CD5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22F303D421A56930008E9CD5 /* Project.app */,
-				22F303E821A56930008E9CD5 /* ProjectTests.xctest */,
-				22F303F321A56930008E9CD5 /* ProjectUITests.xctest */,
+				22F303D421A56930008E9CD5 /* ShareTunes.app */,
+				22F303E821A56930008E9CD5 /* ShareTunesTests.xctest */,
+				22F303F321A56930008E9CD5 /* ShareTunesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		22F303D621A56930008E9CD5 /* Project */ = {
+		22F303D621A56930008E9CD5 /* ShareTunes */ = {
 			isa = PBXGroup;
 			children = (
 				223633A421AE3C0D000C172C /* RadioButton.swift */,
 				22F303D721A56930008E9CD5 /* AppDelegate.swift */,
 				22F303D921A56930008E9CD5 /* ViewController.swift */,
 				22F303DB21A56930008E9CD5 /* Main.storyboard */,
-				3F3973D821B666AC0034D548 /* PopUpView.xib */,
 				3FDEAC5A21B63B3D004FABDB /* PopUpViewController.swift */,
 				223633A621AE3F0A000C172C /* PlaylistTableViewCell.swift */,
 				3FA64AC421ACCE3A0095D177 /* PlaylistVC.swift */,
@@ -144,25 +144,25 @@
 				22F303E321A56930008E9CD5 /* Info.plist */,
 				228C6EC221A6548F008DA3A0 /* SpotifyUserModel.swift */,
 			);
-			path = Project;
+			path = ShareTunes;
 			sourceTree = "<group>";
 		};
-		22F303EB21A56930008E9CD5 /* ProjectTests */ = {
+		22F303EB21A56930008E9CD5 /* ShareTunesTests */ = {
 			isa = PBXGroup;
 			children = (
 				22F303EC21A56930008E9CD5 /* ProjectTests.swift */,
 				22F303EE21A56930008E9CD5 /* Info.plist */,
 			);
-			path = ProjectTests;
+			path = ShareTunesTests;
 			sourceTree = "<group>";
 		};
-		22F303F621A56930008E9CD5 /* ProjectUITests */ = {
+		22F303F621A56930008E9CD5 /* ShareTunesUITests */ = {
 			isa = PBXGroup;
 			children = (
 				22F303F721A56930008E9CD5 /* ProjectUITests.swift */,
 				22F303F921A56930008E9CD5 /* Info.plist */,
 			);
-			path = ProjectUITests;
+			path = ShareTunesUITests;
 			sourceTree = "<group>";
 		};
 		4A58C23636069286E18B2C19 /* Pods */ = {
@@ -170,6 +170,8 @@
 			children = (
 				3125A23FA772D644C4B13A1C /* Pods-Project.debug.xcconfig */,
 				5DE925818B6CBF21B769BEE8 /* Pods-Project.release.xcconfig */,
+				3BF57FADFE56285918204FC3 /* Pods-ShareTunes.debug.xcconfig */,
+				BAC5C6363012725158FA1FD2 /* Pods-ShareTunes.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -178,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				7A1A8C3A248221F767A0538A /* Pods_Project.framework */,
+				FC70533EF83077831A484D3D /* Pods_ShareTunes.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,9 +188,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22F303D321A56930008E9CD5 /* Project */ = {
+		22F303D321A56930008E9CD5 /* ShareTunes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22F303FC21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "Project" */;
+			buildConfigurationList = 22F303FC21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ShareTunes" */;
 			buildPhases = (
 				1BDE0FDB80ABE50003E28A07 /* [CP] Check Pods Manifest.lock */,
 				22F303D021A56930008E9CD5 /* Sources */,
@@ -200,14 +203,14 @@
 			);
 			dependencies = (
 			);
-			name = Project;
+			name = ShareTunes;
 			productName = Project;
-			productReference = 22F303D421A56930008E9CD5 /* Project.app */;
+			productReference = 22F303D421A56930008E9CD5 /* ShareTunes.app */;
 			productType = "com.apple.product-type.application";
 		};
-		22F303E721A56930008E9CD5 /* ProjectTests */ = {
+		22F303E721A56930008E9CD5 /* ShareTunesTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22F303FF21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ProjectTests" */;
+			buildConfigurationList = 22F303FF21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ShareTunesTests" */;
 			buildPhases = (
 				22F303E421A56930008E9CD5 /* Sources */,
 				22F303E521A56930008E9CD5 /* Frameworks */,
@@ -218,14 +221,14 @@
 			dependencies = (
 				22F303EA21A56930008E9CD5 /* PBXTargetDependency */,
 			);
-			name = ProjectTests;
+			name = ShareTunesTests;
 			productName = ProjectTests;
-			productReference = 22F303E821A56930008E9CD5 /* ProjectTests.xctest */;
+			productReference = 22F303E821A56930008E9CD5 /* ShareTunesTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		22F303F221A56930008E9CD5 /* ProjectUITests */ = {
+		22F303F221A56930008E9CD5 /* ShareTunesUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22F3040221A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ProjectUITests" */;
+			buildConfigurationList = 22F3040221A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ShareTunesUITests" */;
 			buildPhases = (
 				22F303EF21A56930008E9CD5 /* Sources */,
 				22F303F021A56930008E9CD5 /* Frameworks */,
@@ -236,9 +239,9 @@
 			dependencies = (
 				22F303F521A56930008E9CD5 /* PBXTargetDependency */,
 			);
-			name = ProjectUITests;
+			name = ShareTunesUITests;
 			productName = ProjectUITests;
-			productReference = 22F303F321A56930008E9CD5 /* ProjectUITests.xctest */;
+			productReference = 22F303F321A56930008E9CD5 /* ShareTunesUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -264,7 +267,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 22F303CF21A56930008E9CD5 /* Build configuration list for PBXProject "Project" */;
+			buildConfigurationList = 22F303CF21A56930008E9CD5 /* Build configuration list for PBXProject "ShareTunes" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -277,9 +280,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				22F303D321A56930008E9CD5 /* Project */,
-				22F303E721A56930008E9CD5 /* ProjectTests */,
-				22F303F221A56930008E9CD5 /* ProjectUITests */,
+				22F303D321A56930008E9CD5 /* ShareTunes */,
+				22F303E721A56930008E9CD5 /* ShareTunesTests */,
+				22F303F221A56930008E9CD5 /* ShareTunesUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -290,7 +293,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F303E221A56930008E9CD5 /* LaunchScreen.storyboard in Resources */,
-				3F3973D921B666AC0034D548 /* PopUpView.xib in Resources */,
 				22F303DF21A56930008E9CD5 /* Assets.xcassets in Resources */,
 				22F303DD21A56930008E9CD5 /* Main.storyboard in Resources */,
 			);
@@ -328,7 +330,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Project-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ShareTunes-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -343,7 +345,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ShareTunes/Pods-ShareTunes-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
 				"${BUILT_PRODUCTS_DIR}/LiquidFloatingActionButton/LiquidFloatingActionButton.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
@@ -364,7 +366,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShareTunes/Pods-ShareTunes-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C0BBC2B16E86B882E3014B1F /* [CP] Copy Pods Resources */ = {
@@ -375,7 +377,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-ShareTunes/Pods-ShareTunes-resources.sh",
 				"${PODS_ROOT}/NearbyMessages/Resources/resources/GNSSharedResources.bundle",
 				"${PODS_ROOT}/NearbyMessages/Resources/resources/ic_expand_more.xcassets",
 				"${PODS_ROOT}/NearbyMessages/Resources/resources/ic_nearby_48pt.xcassets",
@@ -389,7 +391,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Project/Pods-Project-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShareTunes/Pods-ShareTunes-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -433,12 +435,12 @@
 /* Begin PBXTargetDependency section */
 		22F303EA21A56930008E9CD5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 22F303D321A56930008E9CD5 /* Project */;
+			target = 22F303D321A56930008E9CD5 /* ShareTunes */;
 			targetProxy = 22F303E921A56930008E9CD5 /* PBXContainerItemProxy */;
 		};
 		22F303F521A56930008E9CD5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 22F303D321A56930008E9CD5 /* Project */;
+			target = 22F303D321A56930008E9CD5 /* ShareTunes */;
 			targetProxy = 22F303F421A56930008E9CD5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -581,7 +583,7 @@
 		};
 		22F303FD21A56930008E9CD5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3125A23FA772D644C4B13A1C /* Pods-Project.debug.xcconfig */;
+			baseConfigurationReference = 3BF57FADFE56285918204FC3 /* Pods-ShareTunes.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -594,7 +596,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleSymbolUtilities/Frameworks/frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleUtilitiesLegacy/Frameworks/frameworks",
 				);
-				INFOPLIST_FILE = Project/Info.plist;
+				INFOPLIST_FILE = ShareTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -611,7 +613,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecs189e.driver-spotify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ENABLE_BATCH_MODE = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "Project-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareTunes-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -619,7 +621,7 @@
 		};
 		22F303FE21A56930008E9CD5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DE925818B6CBF21B769BEE8 /* Pods-Project.release.xcconfig */;
+			baseConfigurationReference = BAC5C6363012725158FA1FD2 /* Pods-ShareTunes.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -632,7 +634,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleSymbolUtilities/Frameworks/frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleUtilitiesLegacy/Frameworks/frameworks",
 				);
-				INFOPLIST_FILE = Project/Info.plist;
+				INFOPLIST_FILE = ShareTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -649,7 +651,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ecs189e.driver-spotify";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ENABLE_BATCH_MODE = NO;
-				SWIFT_OBJC_BRIDGING_HEADER = "Project-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareTunes-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -671,7 +673,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Project.app/Project";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShareTunes.app/ShareTunes";
 			};
 			name = Debug;
 		};
@@ -691,7 +693,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Project.app/Project";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShareTunes.app/ShareTunes";
 			};
 			name = Release;
 		};
@@ -736,7 +738,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		22F303CF21A56930008E9CD5 /* Build configuration list for PBXProject "Project" */ = {
+		22F303CF21A56930008E9CD5 /* Build configuration list for PBXProject "ShareTunes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F303FA21A56930008E9CD5 /* Debug */,
@@ -745,7 +747,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F303FC21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "Project" */ = {
+		22F303FC21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ShareTunes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F303FD21A56930008E9CD5 /* Debug */,
@@ -754,7 +756,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F303FF21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ProjectTests" */ = {
+		22F303FF21A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ShareTunesTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F3040021A56930008E9CD5 /* Debug */,
@@ -763,7 +765,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22F3040221A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ProjectUITests" */ = {
+		22F3040221A56930008E9CD5 /* Build configuration list for PBXNativeTarget "ShareTunesUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22F3040321A56930008E9CD5 /* Debug */,

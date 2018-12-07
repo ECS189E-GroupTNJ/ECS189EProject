@@ -2,9 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Project.xcodeproj">
+      location = "group:/Users/user147183/Desktop/final/ECS189EProject/Project/ShareTunes.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:ShareTunes.xcodeproj">
    </FileRef>
 </Workspace>

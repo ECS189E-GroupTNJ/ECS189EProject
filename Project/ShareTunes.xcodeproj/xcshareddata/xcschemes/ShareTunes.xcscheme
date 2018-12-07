@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22F303D321A56930008E9CD5"
-               BuildableName = "Project.app"
-               BlueprintName = "Project"
-               ReferencedContainer = "container:Project.xcodeproj">
+               BuildableName = "ShareTunes.app"
+               BlueprintName = "ShareTunes"
+               ReferencedContainer = "container:ShareTunes.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22F303E721A56930008E9CD5"
-               BuildableName = "ProjectTests.xctest"
-               BlueprintName = "ProjectTests"
-               ReferencedContainer = "container:Project.xcodeproj">
+               BuildableName = "ShareTunesTests.xctest"
+               BlueprintName = "ShareTunesTests"
+               ReferencedContainer = "container:ShareTunes.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "22F303F221A56930008E9CD5"
-               BuildableName = "ProjectUITests.xctest"
-               BlueprintName = "ProjectUITests"
-               ReferencedContainer = "container:Project.xcodeproj">
+               BuildableName = "ShareTunesUITests.xctest"
+               BlueprintName = "ShareTunesUITests"
+               ReferencedContainer = "container:ShareTunes.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -53,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22F303D321A56930008E9CD5"
-            BuildableName = "Project.app"
-            BlueprintName = "Project"
-            ReferencedContainer = "container:Project.xcodeproj">
+            BuildableName = "ShareTunes.app"
+            BlueprintName = "ShareTunes"
+            ReferencedContainer = "container:ShareTunes.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22F303D321A56930008E9CD5"
-            BuildableName = "Project.app"
-            BlueprintName = "Project"
-            ReferencedContainer = "container:Project.xcodeproj">
+            BuildableName = "ShareTunes.app"
+            BlueprintName = "ShareTunes"
+            ReferencedContainer = "container:ShareTunes.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -112,9 +112,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "22F303D321A56930008E9CD5"
-            BuildableName = "Project.app"
-            BlueprintName = "Project"
-            ReferencedContainer = "container:Project.xcodeproj">
+            BuildableName = "ShareTunes.app"
+            BlueprintName = "ShareTunes"
+            ReferencedContainer = "container:ShareTunes.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

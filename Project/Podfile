@@ -4,7 +4,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '12.0'
 
-  target 'Project' do
+  target 'ShareTunes' do
     use_frameworks!
     # Add Button
     pod 'LiquidFloatingActionButton', :git => 'https://github.com/alexsanderkhitev/LiquidFloatingActionButton.git'
