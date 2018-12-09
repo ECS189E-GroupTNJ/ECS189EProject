@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import PopupDialog
 
 class ViewController: UIViewController {
     
     
     @IBOutlet weak var connectWithSpotifyButton: UIButton!
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +42,41 @@ class ViewController: UIViewController {
         
         print("Button Pressed")
         
-        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addSongVC")
-        self.navigationController?.pushViewController(viewController, animated: true)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.waitUntilConnected(attempt: 1)
+        }
     }
+    
+    func waitUntilConnected(attempt: Int) {
+        if attempt > 10 {
+            DispatchQueue.main.async {
+                self.popupWithMessage(title: "Connection Timeout", body: "ShareTunes was unable to connect to Spotify. Try again.")
+            }
+        }
+        else if self.delegate.appRemote.isConnected {
+            let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "addSongVC")
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        else {
+            DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 0.5) {
+                self.waitUntilConnected(attempt: attempt + 1)
+            }
+        }
+    }
+    
+    func popupWithMessage(title: String, body: String) {
+        let popup = PopupDialog(title: title, message: body)
+        popup.view.backgroundColor = UIColor.groupTableViewBackground
+        
+        let confirm = DefaultButton(title: "Confirm") {
+            
+        }
+        confirm.backgroundColor = UIColor.groupTableViewBackground
+        
+        popup.addButton(confirm)
+        
+        self.present(popup, animated: true)
+    }
+    
 }
 
