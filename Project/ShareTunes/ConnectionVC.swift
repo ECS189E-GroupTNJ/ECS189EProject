@@ -9,7 +9,7 @@
 import UIKit
 import PopupDialog
 
-class ViewController: UIViewController {
+class ConnectionVC: UIViewController {
     
     
     @IBOutlet weak var connectWithSpotifyButton: UIButton!

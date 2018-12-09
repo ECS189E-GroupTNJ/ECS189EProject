@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-650" y="-390"/>
         </scene>
-        <!--View Controller-->
+        <!--ConnectionVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="viewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewController" id="BYZ-38-t0r" customClass="ConnectionVC" customModule="ShareTunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -38,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzl-NZ-yEr" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bzl-NZ-yEr" customClass="RoundButton" customModule="ShareTunes" customModuleProvider="target">
                                 <rect key="frame" x="45.666666666666657" y="426" width="323" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="  CONNECT WITH SPOTIFY  "/>
@@ -68,7 +68,7 @@
         <!--Add SongVC-->
         <scene sceneID="idN-mJ-x1m">
             <objects>
-                <viewController storyboardIdentifier="addSongVC" id="Kb9-gH-QTS" customClass="AddSongVC" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addSongVC" id="Kb9-gH-QTS" customClass="AddSongVC" customModule="ShareTunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qRH-PL-42G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,7 +77,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ug-lc-XUM" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ug-lc-XUM" customClass="RoundButton" customModule="ShareTunes" customModuleProvider="target">
                                 <rect key="frame" x="89" y="330" width="236" height="236"/>
                                 <color key="backgroundColor" red="0.87663950930000001" green="0.2461886267" blue="0.14737157789999999" alpha="0.095917166145205485" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -89,7 +89,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4cY-We-iSE" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4cY-We-iSE" customClass="RoundButton" customModule="ShareTunes" customModuleProvider="target">
                                 <rect key="frame" x="109.66666666666667" y="350.66666666666669" width="194.66666666666663" height="194.66666666666669"/>
                                 <color key="backgroundColor" red="0.87663950930000001" green="0.2461886267" blue="0.14737157789999999" alpha="0.20135916100821918" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -101,7 +101,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMt-YP-JrK" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMt-YP-JrK" customClass="RoundButton" customModule="ShareTunes" customModuleProvider="target">
                                 <rect key="frame" x="129.33333333333331" y="370.33333333333331" width="155.33333333333331" height="155.33333333333331"/>
                                 <color key="backgroundColor" red="0.87663950926156209" green="0.24618862666202293" blue="0.14737157790285876" alpha="0.30139661815068491" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -113,7 +113,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfn-Ll-4p0" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nfn-Ll-4p0" customClass="RoundButton" customModule="ShareTunes" customModuleProvider="target">
                                 <rect key="frame" x="149" y="390" width="116" height="116"/>
                                 <color key="backgroundColor" red="0.87663950926156209" green="0.24618862666202293" blue="0.14737157790285876" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
@@ -125,7 +125,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-b7-Tai" customClass="RoundButton" customModule="Project" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-b7-Tai" customClass="RoundButton" customModule="ShareTunes" customModuleProvider="target">
                                 <rect key="frame" x="169.66666666666666" y="410.66666666666669" width="74.666666666666657" height="74.666666666666686"/>
                                 <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -198,7 +198,7 @@
         <!--Pop Up View Controller-->
         <scene sceneID="Ttb-Mz-MGf">
             <objects>
-                <viewController storyboardIdentifier="popUpViewController" id="c5H-h8-DP0" customClass="PopUpViewController" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="popUpViewController" id="c5H-h8-DP0" customClass="PopUpViewController" customModule="ShareTunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oUQ-cd-EdU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,7 +328,7 @@
         <!--Select a Playlist-->
         <scene sceneID="3lU-u4-GLQ">
             <objects>
-                <viewController storyboardIdentifier="playlistVC" id="y4F-w5-ZTP" customClass="PlaylistVC" customModule="Project" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playlistVC" id="y4F-w5-ZTP" customClass="PlaylistVC" customModule="ShareTunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bkO-zo-UZ4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -341,7 +341,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="playlistCell" id="OzD-Y5-yKC" customClass="PlaylistTableViewCell" customModule="Project" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="playlistCell" id="OzD-Y5-yKC" customClass="PlaylistTableViewCell" customModule="ShareTunes" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OzD-Y5-yKC" id="6xU-NH-Vs0">
@@ -355,7 +355,7 @@
                                                         <constraint firstAttribute="height" constant="65" id="otv-6G-RZy"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuO-oG-IEp" customClass="RadioButton" customModule="Project" customModuleProvider="target">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TuO-oG-IEp" customClass="RadioButton" customModule="ShareTunes" customModuleProvider="target">
                                                     <rect key="frame" x="14" y="27.333333333333329" width="25" height="25"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="ALa-jI-1Nl"/>
