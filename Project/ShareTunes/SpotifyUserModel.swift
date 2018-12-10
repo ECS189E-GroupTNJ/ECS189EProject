@@ -98,7 +98,7 @@ class SpotifyUserModel {
     var playlistStats: [String: (Double, Double, Double, Double, Double)] = [:]
     let statsCollectionBarrier = DispatchGroup()
     var currentPlaylistIndex: Int?
-    let defaultPlaylistName = "default"
+    let defaultPlaylistName = "ShareTunes Playlist"
     var currentTrackID: String?
     
     func configuration() -> URLSessionConfiguration {
