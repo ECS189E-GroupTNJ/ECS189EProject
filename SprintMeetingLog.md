@@ -71,9 +71,37 @@
 ### Coming Tasks
 * Research possible methods of detecting near by app users
 
-* Implement View Controllers (connect UI and model)
+* Implement View Controllers (connect UI*  and model)
 * UI for PlaylistTableView
 * Professor's Challenge
 * Retrieve playlist image for display
 
 * Tasks to be distributed on Tuesday (Next meeting)
+
+## Meeting 3
+
+### Issues
+* Broadcasting track information > using Google Nearby Messaging
+
+### Coming Tasks
+* Nearby messaging setup
+	* Setup to be able to do message passing over BLE
+	* Handle any user permission issue
+	* Task Owner: Jason
+
+* Message handling
+	* Send message when adding track
+	* Receive / interpret message on the other end
+	* Trigger notification
+	* Task Owner: Tony
+
+* User Configurations
+	* PlaylistTableView shows playlist image
+	* UI and model connection for configurations
+	* Task Owner: Noshin, Tony
+
+* UI Update for notifications
+	* UI support for receiving notification
+	* Show track image, track name, artist name, sender name
+	* Popup prompting whether to add the track to playlist
+	* Task Owner: Noshin
