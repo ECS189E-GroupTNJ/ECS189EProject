@@ -1,107 +1,51 @@
-# Sprint Meeting Log
+# ECS189E Project
 
-## Meeting 1
+## Third Party Library
+* Spotify iOS SDK
 
-### Past Progress
-* -
+## Server Support
+* SpotifyServer
 
-### Current Issues
-* -
+## View Controllers
 
-### Coming Tasks
-* UI
-	* Design UI for previously discussed view controllers
-	* Possible addition of Settings view controller
-		* To be discussed in later meetings
-	* Integration of open source UI libraries for better aesthetics
-	* Complete the implementation of necessary interfaces by next week
-		* Text fields for user information, buttons for triggering events, etc.
-	* Task Owner: Noshin
+### LoginViewController
+* initial view controller
+* takes Spotify account
+* move to VoiceControlViewController after login is complete
 
-* Authorization (Spotify)
-	* For SpotifyUserModel, implement Spotify login
-		* take in Spotify username and password to receive authentication token
-	* Take in account of all authorization scopes for the purpose of the app
-	* Task Owner: Jason
+### VoiceControlViewController
+* upon specific voice command, switch to IdentificationViewController
+* start with a capture button, experiment with voice controls if time allows
 
-* Track Identification
-	* Read in the currently playing track
-	* Possible extension of displaying song information
-		* show album cover, artist name, title, etc.
-	* Task Owner: Tony
+### IdentificationViewController
+* After identifying the music / adding to playlist, switch back to VoiceControlViewController
 
-* Addtion to Playlist
-	* Add the playing track to a playlist
-	* By default, add to a playlist of set name
-		* possible extension to select a playlist as a setting
-	* Task Owner: Tony
-    
 
-## Meeting 2
+## Models
+* SpotifyModel: handle Spotify related tasks: authentication/playlist modification
 
-### Past Progress
-* UI 
-	* Initial screen complete
-	* Song addition screen complete
-	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/0e773e579460c500f6e00a551c8a2dce6c39b8a5
-	
-* Authorization
-	* Registered developer app for spotify
-	* Receive access tokens
-	* Able to connect to installed Spotify app
-	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/0a259055b4ec914a316a40018c439ff3894ece54
-	
-* Track Identification
-	* Able to retrieve current track info (given authentication setup)
-	* Retreive album cover, artist name, track title for possible UI usage
-	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/25dbf0ed25a88a40481f26e4202c74165f37d86c
+## Test Planning
+* Classmates/friends survey
+	* How easy is the app to use?
+	* How comfortable is adding the track to the playlist?
+	* What would be some convenient features/configurations for this app?
+	* How long does each task (requring API calls) take?
 
-* Addition to Playlist
-	* Default playlist created if not selected
-	* Create playlist if necessary
-	* Update the user's list of playlists
-	* Add the track to playlist given track ID
-	* Implement Spotify Web API calls
-	* commit: https://github.com/ECS189E-GroupTNJ/ECS189EProject/commit/25dbf0ed25a88a40481f26e4202c74165f37d86c
+![screens](https://github.com/ECS189E-GroupTNJ/ECS189EProject/raw/master/screens.png)
 
-### Current Issues
-* Framework/Library to be used for Challenge not decided
-	* To be discussed again in the next meeting
+## Meeting Schedule
+* Monday 10 am
+* Friday 11 am
+* Tuesday 12 pm (Sprint)
 
-### Coming Tasks
-* Research possible methods of detecting near by app users
+## Trello
+* https://trello.com/b/z4m1ryer/ecs189e
 
-* Implement View Controllers (connect UI*  and model)
-* UI for PlaylistTableView
-* Professor's Challenge
-* Retrieve playlist image for display
+## Challenge
+* When adding a song, add the song to playlist of everyone in the car
+* Can assume that everyone in the car is already running the app
 
-* Tasks to be distributed on Tuesday (Next meeting)
-
-## Meeting 3
-
-### Issues
-* Broadcasting track information > using Google Nearby Messaging
-
-### Coming Tasks
-* Nearby messaging setup
-	* Setup to be able to do message passing over BLE
-	* Handle any user permission issue
-	* Task Owner: Jason
-
-* Message handling
-	* Send message when adding track
-	* Receive / interpret message on the other end
-	* Trigger notification
-	* Task Owner: Tony
-
-* User Configurations
-	* PlaylistTableView shows playlist image
-	* UI and model connection for configurations
-	* Task Owner: Noshin, Tony
-
-* UI Update for notifications
-	* UI support for receiving notification
-	* Show track image, track name, artist name, sender name
-	* Popup prompting whether to add the track to playlist
-	* Task Owner: Noshin
+## Team Members
+* Tony Woo (Github: tonyswoo)
+* Noshin Kamal (Github: noshin-k)
+* Jason Bhan (Github: jhbhan)
