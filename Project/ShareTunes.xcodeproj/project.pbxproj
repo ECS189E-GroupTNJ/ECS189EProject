@@ -610,7 +610,7 @@
 					"-v",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecs189e.sharetunes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecs189e.sharetunes.submit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ShareTunes-Bridging-Header.h";
@@ -648,7 +648,7 @@
 					"-v",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.ecs189e.sharetunes;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ecs189e.sharetunes.submit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_OBJC_BRIDGING_HEADER = "ShareTunes-Bridging-Header.h";

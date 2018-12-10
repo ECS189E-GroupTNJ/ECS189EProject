@@ -22,7 +22,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.ecs189e.sharetunes</string>
+			<string>com.ecs189e.sharetunes.submit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>driver-spotify-login</string>
